@@ -90,24 +90,32 @@ export default function StrandsPage() {
           </StackedPanel>
 
           <StackedPanel index={2} number="03" label={P["03"].label} title={P["03"].title} wide>
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-[1fr_170px]">
-              <div>
-                <div className="grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
-                  {P["03"].body.map((p) => (
-                    <p key={p} className="text-sm text-ink-soft">
-                      {p}
-                    </p>
-                  ))}
-                </div>
-                <Filmstrip frames={P["03"].states} captionPosition="top" locked className="mt-5" />
-              </div>
-              <figure className="mx-auto w-full max-w-[170px] self-center">
-                <ScreenLoop frames={P["03"].adjust.frames} alt={P["03"].adjust.alt} dwell={2000} fade={400} locked />
-                <figcaption className="mt-3 text-center text-[10px] font-medium uppercase tracking-wide text-ink-soft">
-                  Adjust impact
-                </figcaption>
-              </figure>
+            <div className="grid grid-cols-1 gap-x-12 gap-y-3 md:grid-cols-2">
+              {P["03"].body.map((p) => (
+                <p key={p} className="text-sm text-ink-soft md:text-base">
+                  {p}
+                </p>
+              ))}
             </div>
+            <Filmstrip
+              frames={P["03"].states}
+              captionPosition="top"
+              locked
+              className="mt-6"
+              trailing={{
+                caption: "Adjust impact",
+                node: (
+                  <ScreenLoop
+                    variant="card"
+                    frames={P["03"].adjust.frames}
+                    alt={P["03"].adjust.alt}
+                    dwell={2000}
+                    fade={400}
+                    locked
+                  />
+                ),
+              }}
+            />
             <QuoteBlock quote={P["03"].quote} className={compactQuote} />
           </StackedPanel>
 

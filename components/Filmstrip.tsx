@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, revealViewport, staggerContainer } from "@/lib/motion";
 
@@ -11,11 +12,13 @@ type FilmstripProps = {
   /** Frosted-glass overlay + lock icon for interfaces under NDA (scaled for small frames). */
   locked?: boolean;
   captionPosition?: "top" | "bottom";
+  /** An extra card of a different kind, placed last after a thin divider. */
+  trailing?: { caption: string; node: ReactNode };
   className?: string;
 };
 
 // Frames without a `src` render a placeholder tile, so a state sequence can be laid out before the screens exist.
-export default function Filmstrip({ frames, locked = false, captionPosition = "bottom", className = "" }: FilmstripProps) {
+export default function Filmstrip({ frames, locked = false, captionPosition = "bottom", trailing, className = "" }: FilmstripProps) {
   const caption = (text: string, pos: "top" | "bottom") => (
     <figcaption
       className={`${pos === "top" ? "mb-2" : "mt-2"} text-[9px] font-medium uppercase tracking-wide text-ink-soft md:text-[10px]`}
@@ -30,7 +33,9 @@ export default function Filmstrip({ frames, locked = false, captionPosition = "b
       whileInView="visible"
       viewport={revealViewport}
       variants={staggerContainer}
-      style={{ gridTemplateColumns: `repeat(${frames.length}, minmax(0, 1fr))` }}
+      style={{
+        gridTemplateColumns: `repeat(${frames.length}, minmax(0, 1fr))${trailing ? " 9px minmax(0, 1fr)" : ""}`,
+      }}
       className={`grid gap-2 md:gap-3 ${className}`}
     >
       {frames.map((f) => (
@@ -65,6 +70,17 @@ export default function Filmstrip({ frames, locked = false, captionPosition = "b
           {captionPosition === "bottom" && caption(f.caption, "bottom")}
         </motion.figure>
       ))}
+
+      {trailing && (
+        <>
+          <div aria-hidden className="mx-auto w-px self-stretch bg-ink/15" />
+          <motion.figure variants={fadeUp}>
+            {captionPosition === "top" && caption(trailing.caption, "top")}
+            {trailing.node}
+            {captionPosition === "bottom" && caption(trailing.caption, "bottom")}
+          </motion.figure>
+        </>
+      )}
     </motion.div>
   );
 }

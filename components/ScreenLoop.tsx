@@ -17,11 +17,13 @@ type ScreenLoopProps = {
   transition?: "fade" | "slide";
   /** Frosted-glass overlay + lock icon for interfaces under NDA; eases up a little on hover, never fully sharp. */
   locked?: boolean;
+  /** "phone" is the framed phone; "card" matches the small filmstrip cards (same size, blur and lock). */
+  variant?: "phone" | "card";
   className?: string;
 };
 
 // Decorative silent loop: screens crossfade inside a simple phone frame. No controls, not interactive.
-export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 400, transition = "fade", locked = false, className = "" }: ScreenLoopProps) {
+export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 400, transition = "fade", locked = false, variant = "phone", className = "" }: ScreenLoopProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.3 });
   const [i, setI] = useState(0);
@@ -32,19 +34,27 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
   }, []);
 
   useEffect(() => {
-    if (!inView || reduced) return;
+    if (!inView) return;
     const id = setTimeout(() => setI((n) => (n + 1) % frames.length), dwells?.[i] ?? dwell);
     return () => clearTimeout(id);
-  }, [inView, reduced, dwell, dwells, i, frames.length]);
+  }, [inView, dwell, dwells, i, frames.length]);
+
+  // Reduced motion keeps the opacity crossfades (they are gentle) but drops the horizontal slide.
+  const mode = reduced ? "fade" : transition;
+  const card = variant === "card";
 
   return (
     <div
       ref={ref}
       role="img"
       aria-label={alt}
-      className={`group relative aspect-[480/984] w-full select-none overflow-hidden rounded-[1.6rem] border-[5px] border-ink bg-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)] ${locked ? "cursor-default" : "pointer-events-none"} ${className}`}
+      className={`group relative w-full select-none overflow-hidden bg-white ${
+        card
+          ? "aspect-[7/14] rounded-lg border border-ink/10"
+          : "aspect-[480/984] rounded-[1.6rem] border-[5px] border-ink shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)]"
+      } ${locked ? "cursor-default" : "pointer-events-none"} ${className}`}
     >
-      {transition === "fade" &&
+      {mode === "fade" &&
         frames.map((src, n) => (
           <Image
             key={src}
@@ -59,7 +69,7 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
           />
         ))}
 
-      {transition === "slide" && (
+      {mode === "slide" && (
         <>
           {/* Preload every screen so the slide never waits on the network. */}
           <div aria-hidden className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0">
@@ -94,13 +104,17 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
         <>
           <div
             aria-hidden
-            className="absolute inset-0 bg-white/[0.06] backdrop-blur-[3px] transition-[backdrop-filter] duration-300 ease-out group-hover:backdrop-blur-[2px]"
+            className={`absolute inset-0 bg-white/[0.06] transition-[backdrop-filter] duration-300 ease-out ${
+              card ? "backdrop-blur-[1.5px] group-hover:backdrop-blur-[1px]" : "backdrop-blur-[3px] group-hover:backdrop-blur-[2px]"
+            }`}
           />
           <svg
             aria-hidden
             viewBox="0 0 24 24"
             fill="none"
-            className="absolute right-2 top-2 h-[18px] w-[18px] rounded-full bg-white/50 p-[3px] text-ink/60 opacity-70 transition-opacity duration-300 ease-out group-hover:opacity-100"
+            className={`absolute rounded-full bg-white/50 text-ink/60 opacity-70 transition-opacity duration-300 ease-out group-hover:opacity-100 ${
+              card ? "right-1 top-1 h-3 w-3 p-[1.5px]" : "right-2 top-2 h-[18px] w-[18px] p-[3px]"
+            }`}
           >
             <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" strokeWidth="2" />
             <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
