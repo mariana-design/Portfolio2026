@@ -57,7 +57,7 @@ export default function StrandsPage() {
               <div className="grid grid-cols-3 gap-3 md:gap-5">
                 {P["01"].loops.map((l) => (
                   <figure key={l.label}>
-                    <ScreenLoop frames={l.frames} alt={l.alt} />
+                    <ScreenLoop frames={l.frames} alt={l.alt} locked />
                     <figcaption className="mt-3 text-center text-[10px] font-medium uppercase tracking-wide text-ink-soft md:text-xs">
                       {l.label}
                     </figcaption>
