@@ -56,7 +56,15 @@ export const strands = {
         "A savings goal isn't just “saving” or “done.” I designed eight states for a single goal — on track, off track, paused, expired, completed, releasing, released, deleting — each with its own message, its own available actions, and its own way of guiding the user to what's next.",
         "Every add-money or withdraw-money action ran through an “Adjust impact” step first: showing exactly how the change would move the monthly payment or the target date, before the user confirmed anything. Every delete required a confirmation explaining, in plain terms, that the saved money would be refunded — and where.",
       ],
-      states: ["On track", "Off track", "Paused", "Expired", "Completed", "Releasing", "Released", "Deleting"],
+      states: ["On track", "Off track", "Paused", "Expired", "Completed", "Releasing", "Released", "Deleting"].map((caption, n) => ({
+        caption,
+        src: `/strands/state-${n + 1}.webp`,
+        alt: `Moneybox goal in the "${caption}" state`,
+      })),
+      adjust: {
+        alt: "Adjust impact: the amount to add, then the Adjust impact step showing how it changes the monthly payment or target date",
+        frames: [1, 2].map((n) => `/strands/adjust-${n}.webp`),
+      },
       quote: "If the user was going to trust us with their money, every state had to explain itself — not just the good ones.",
     },
     "04": {
