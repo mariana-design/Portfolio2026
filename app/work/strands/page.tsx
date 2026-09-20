@@ -8,8 +8,8 @@ import TagList from "@/components/TagList";
 import MetaRow from "@/components/MetaRow";
 import QuoteBlock from "@/components/QuoteBlock";
 import VisualPlaceholder from "@/components/VisualPlaceholder";
-import Filmstrip from "@/components/Filmstrip";
 import ScreenLoop from "@/components/ScreenLoop";
+import StateLoop from "@/components/StateLoop";
 import HowIWorkIntro from "@/components/HowIWorkIntro";
 import NDANote from "@/components/NDANote";
 import ReadNext from "@/components/ReadNext";
@@ -90,33 +90,33 @@ export default function StrandsPage() {
           </StackedPanel>
 
           <StackedPanel index={2} number="03" label={P["03"].label} title={P["03"].title} wide>
-            <div className="grid grid-cols-1 gap-x-12 gap-y-3 md:grid-cols-2">
-              {P["03"].body.map((p) => (
-                <p key={p} className="text-sm text-ink-soft md:text-base">
-                  {p}
-                </p>
-              ))}
+            <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.3fr_0.7fr]">
+              <div>
+                <p className="text-sm text-ink-soft md:text-base">{P["03"].body[0]}</p>
+                <div className="my-6 grid grid-cols-[104px_1fr] items-center gap-6">
+                  <figure>
+                    <ScreenLoop
+                      variant="card"
+                      frames={P["03"].adjust.frames}
+                      alt={P["03"].adjust.alt}
+                      dwell={2000}
+                      fade={400}
+                      locked
+                    />
+                    <figcaption className="mt-2 text-center text-[10px] font-medium uppercase tracking-wide text-ink-soft">
+                      Adjust impact
+                    </figcaption>
+                  </figure>
+                  <p className="text-sm text-ink-soft md:text-base">{P["03"].body[1]}</p>
+                </div>
+                <QuoteBlock quote={P["03"].quote} className="py-4! text-left! text-xl! md:text-2xl!" />
+              </div>
+              <StateLoop
+                className="mx-auto w-full max-w-[210px]"
+                states={P["03"].states}
+                alt="Moneybox goal moving through its states: on track, off track, paused, expired, completed, releasing, released, deleting"
+              />
             </div>
-            <Filmstrip
-              frames={P["03"].states}
-              captionPosition="top"
-              locked
-              className="mt-6"
-              trailing={{
-                caption: "Adjust impact",
-                node: (
-                  <ScreenLoop
-                    variant="card"
-                    frames={P["03"].adjust.frames}
-                    alt={P["03"].adjust.alt}
-                    dwell={2000}
-                    fade={400}
-                    locked
-                  />
-                ),
-              }}
-            />
-            <QuoteBlock quote={P["03"].quote} className={compactQuote} />
           </StackedPanel>
 
           <StackedPanel index={3} number="04" label={P["04"].label} title={P["04"].title} last>

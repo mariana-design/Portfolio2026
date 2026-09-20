@@ -17,13 +17,15 @@ type ScreenLoopProps = {
   transition?: "fade" | "slide";
   /** Frosted-glass overlay + lock icon for interfaces under NDA; eases up a little on hover, never fully sharp. */
   locked?: boolean;
+  /** Called with the index of the screen that becomes visible. */
+  onIndexChange?: (index: number) => void;
   /** "phone" is the framed phone; "card" matches the small filmstrip cards (same size, blur and lock). */
   variant?: "phone" | "card";
   className?: string;
 };
 
 // Decorative silent loop: screens crossfade inside a simple phone frame. No controls, not interactive.
-export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 400, transition = "fade", locked = false, variant = "phone", className = "" }: ScreenLoopProps) {
+export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 400, transition = "fade", locked = false, onIndexChange, variant = "phone", className = "" }: ScreenLoopProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.3 });
   const [i, setI] = useState(0);
@@ -32,6 +34,10 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
+
+  useEffect(() => {
+    onIndexChange?.(i);
+  }, [i, onIndexChange]);
 
   useEffect(() => {
     if (!inView) return;
