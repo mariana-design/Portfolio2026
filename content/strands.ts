@@ -18,7 +18,23 @@ export const strands = {
       label: "The showcase app",
       title: "Selling a *feeling*, not a feature list",
       body: "Banks don't buy a spec sheet — they buy what their own customers would feel using it. When I joined, Strands had the backend logic (account aggregation, a financial calendar, spending analysis) but no real interface to show for it. I designed and built the UI and UX from the ground up, and pushed back on the backend itself where it didn't hold up — because a demo that breaks doesn't sell anything.",
-      visuals: ["Account Aggregation flow", "Financial Calendar flow", "Financial Analysis flow"],
+      loops: [
+        {
+          label: "Account Aggregation",
+          alt: "Account Aggregation flow on iOS: no accounts, connection established, Caixa accounts, BBVA added, several banks aggregated",
+          frames: [1, 2, 3, 4, 5].map((n) => `/strands/aggregation-${n}.webp`),
+        },
+        {
+          label: "Financial Calendar",
+          alt: "Financial Calendar flow on iOS: calendar, a day's expected transactions, transaction details, monthly overview, month picker",
+          frames: [1, 2, 3, 4, 5].map((n) => `/strands/calendar-${n}.webp`),
+        },
+        {
+          label: "Financial Analysis",
+          alt: "Financial Analysis flow on iOS: spending overview, selected month, Travel category, subcategory, transaction details",
+          frames: [1, 2, 3, 4, 5].map((n) => `/strands/analysis-${n}.webp`),
+        },
+      ],
       quote: "There was no interface to inherit. If a bank was going to picture their logo on it, I had to build the thing worth picturing first.",
     },
     "02": {

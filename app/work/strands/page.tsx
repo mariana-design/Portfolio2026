@@ -9,6 +9,7 @@ import MetaRow from "@/components/MetaRow";
 import QuoteBlock from "@/components/QuoteBlock";
 import VisualPlaceholder from "@/components/VisualPlaceholder";
 import Filmstrip from "@/components/Filmstrip";
+import ScreenLoop from "@/components/ScreenLoop";
 import HowIWorkIntro from "@/components/HowIWorkIntro";
 import NDANote from "@/components/NDANote";
 import ReadNext from "@/components/ReadNext";
@@ -48,13 +49,22 @@ export default function StrandsPage() {
 
         <PanelStack>
           <StackedPanel index={0} number="01" label={P["01"].label} title={P["01"].title} wide>
-            <p className={`max-w-3xl ${text}`}>{P["01"].body}</p>
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-              {P["01"].visuals.map((v) => (
-                <VisualPlaceholder key={v} label={v} aspect="video" />
-              ))}
+            <div className="grid grid-cols-1 items-center gap-x-12 gap-y-8 md:grid-cols-[0.8fr_1.4fr]">
+              <div>
+                <p className={text}>{P["01"].body}</p>
+                <QuoteBlock quote={P["01"].quote} className="py-6! text-left! text-xl! md:text-2xl!" />
+              </div>
+              <div className="grid grid-cols-3 gap-3 md:gap-5">
+                {P["01"].loops.map((l) => (
+                  <figure key={l.label}>
+                    <ScreenLoop frames={l.frames} alt={l.alt} />
+                    <figcaption className="mt-3 text-center text-[10px] font-medium uppercase tracking-wide text-ink-soft md:text-xs">
+                      {l.label}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
             </div>
-            <QuoteBlock quote={P["01"].quote} className={compactQuote} />
           </StackedPanel>
 
           <StackedPanel index={1} number="02" label={P["02"].label} title={P["02"].title} wide>
