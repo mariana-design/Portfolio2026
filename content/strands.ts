@@ -41,7 +41,12 @@ export const strands = {
       label: "Moneybox, from zero",
       title: "No base, no precedent, *just a product owner and a whiteboard*",
       body: "Moneybox went a step further: it wasn't backend logic waiting for a UI. It didn't exist at all. It was our flagship feature — a savings goals tool I built alongside the product owner from nothing, deciding screen by screen: choosing a purpose (travel, a car, debt, a rainy-day fund), setting an amount and a target date, then picking how to fund it — manually, or automatically on a monthly, weekly or daily schedule.",
-      visual: "goal creation flow — purpose, amount, frequency, calendar",
+      loop: {
+        alt: "Moneybox New Goal flow on iOS: purpose, name and origin account, amount, dates, saving method, frequency, goal created",
+        frames: [1, 2, 3, 4, 5, 6, 7].map((n) => `/strands/goal-${n}.webp`),
+        // 2s per screen; 2.5s on the manual vs automatic decision (the fifth screen).
+        dwells: [2000, 2000, 2000, 2000, 2500, 2000, 2000],
+      },
       quote: "There was nothing to redesign. We had to decide what 'right' even looked like first.",
     },
     "03": {

@@ -68,11 +68,25 @@ export default function StrandsPage() {
           </StackedPanel>
 
           <StackedPanel index={1} number="02" label={P["02"].label} title={P["02"].title} wide>
-            <div className="grid grid-cols-1 items-start gap-x-12 gap-y-6 md:grid-cols-2">
-              <p className={text}>{P["02"].body}</p>
-              <VisualPlaceholder label={P["02"].visual} aspect="video" />
+            <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.4fr_0.6fr]">
+              <div>
+                <p className={text}>{P["02"].body}</p>
+                <QuoteBlock quote={P["02"].quote} className="py-6! text-left! text-xl! md:text-2xl!" />
+              </div>
+              <figure className="mx-auto w-full max-w-[220px]">
+                <ScreenLoop
+                  frames={P["02"].loop.frames}
+                  dwells={P["02"].loop.dwells}
+                  transition="slide"
+                  fade={350}
+                  alt={P["02"].loop.alt}
+                  locked
+                />
+                <figcaption className="mt-3 text-center text-[10px] font-medium uppercase tracking-wide text-ink-soft md:text-xs">
+                  New goal flow
+                </figcaption>
+              </figure>
             </div>
-            <QuoteBlock quote={P["02"].quote} className={compactQuote} />
           </StackedPanel>
 
           <StackedPanel index={2} number="03" label={P["03"].label} title={P["03"].title} wide>
