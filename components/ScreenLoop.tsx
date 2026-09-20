@@ -58,7 +58,7 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, fade = 400, lock
         <>
           <div
             aria-hidden
-            className="absolute inset-0 bg-white/[0.06] backdrop-blur-[4px] transition-[backdrop-filter] duration-300 ease-out group-hover:backdrop-blur-[3px]"
+            className="absolute inset-0 bg-white/[0.06] backdrop-blur-[3px] transition-[backdrop-filter] duration-300 ease-out group-hover:backdrop-blur-[2px]"
           />
           <svg
             aria-hidden
