@@ -11,7 +11,7 @@ type ScreenLoopProps = {
   dwell?: number;
   /** Crossfade between screens, in ms. */
   fade?: number;
-  /** Frosted-glass overlay + lock icon, for interfaces under NDA. */
+  /** Frosted-glass overlay + lock icon for interfaces under NDA; eases up a little on hover, never fully sharp. */
   locked?: boolean;
   className?: string;
 };
@@ -38,7 +38,7 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, fade = 400, lock
       ref={ref}
       role="img"
       aria-label={alt}
-      className={`pointer-events-none relative aspect-[480/984] w-full select-none overflow-hidden rounded-[1.6rem] border-[5px] border-ink bg-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)] ${className}`}
+      className={`group relative aspect-[480/984] w-full select-none overflow-hidden rounded-[1.6rem] border-[5px] border-ink bg-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)] ${locked ? "cursor-default" : "pointer-events-none"} ${className}`}
     >
       {frames.map((src, n) => (
         <Image
@@ -56,12 +56,15 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, fade = 400, lock
 
       {locked && (
         <>
-          <div aria-hidden className="absolute inset-0 bg-white/[0.18] backdrop-blur-[10px]" />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-white/[0.06] backdrop-blur-[5px] transition-[backdrop-filter] duration-300 ease-out group-hover:backdrop-blur-[3px]"
+          />
           <svg
             aria-hidden
             viewBox="0 0 24 24"
             fill="none"
-            className="absolute right-2 top-2 h-[18px] w-[18px] rounded-full bg-white/50 p-[3px] text-ink/60"
+            className="absolute right-2 top-2 h-[18px] w-[18px] rounded-full bg-white/50 p-[3px] text-ink/60 opacity-70 transition-opacity duration-300 ease-out group-hover:opacity-100"
           >
             <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" strokeWidth="2" />
             <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
