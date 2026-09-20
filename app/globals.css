@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* editorial base */
+  --paper: #ffffff;
+  --ink: #1a1a1a;
+  --ink-soft: #5c5955;
+
+  /* accents */
+  --accent-warm: #f1916b;
+
+  /* dark-break section (system break, e.g. Darma 05) */
+  --paper-dark: #111111;
+  --ink-dark: #f2f0ec;
+
+  /* large rail numerals */
+  --taupe: #b7ab96;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent-warm: var(--accent-warm);
+  --color-paper-dark: var(--paper-dark);
+  --color-ink-dark: var(--ink-dark);
+  --color-taupe: var(--taupe);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* Paper grain: tiny tiled SVG noise, ~6% opacity, no image asset */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.4 -0.2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+}
+
+/* HoverLetters: each letter reacts only while the cursor is on it */
+.hl {
+  position: relative;
+  display: inline-block;
+  transition: color 180ms ease-out, transform 180ms ease-out;
+}
+.hl:hover {
+  color: var(--accent-warm);
+  transform: translateY(-0.1em);
+}
+.hl::after {
+  content: "";
+  position: absolute;
+  left: var(--dx, 50%);
+  bottom: -0.16em;
+  width: max(6px, 0.09em);
+  height: max(6px, 0.09em);
+  border-radius: 9999px;
+  background: var(--accent-warm);
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 180ms ease-out;
+}
+.hl:hover::after {
+  opacity: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* Brand loader: covers the page for ~0.9s, then fades away. CSS only, never blocks longer. */
+.brand-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  pointer-events: none;
+  animation: loader-out 0.9s ease-in-out forwards;
+}
+.brand-loader span {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: -0.04em;
+  animation: loader-mark 0.9s ease-in-out forwards;
+}
+@keyframes loader-out {
+  0%, 65% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+@keyframes loader-mark {
+  0% { opacity: 0; transform: translateY(6px); }
+  35%, 65% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-loader, .brand-loader span { animation-duration: 0.3s; }
 }
