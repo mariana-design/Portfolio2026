@@ -19,7 +19,7 @@ export const home = {
         meta: "AI-native product · Web · iOS",
         href: "/work/darma",
         mockups: [
-          { src: "/darma/cc-resolve-overlap.webp", alt: "Darma iOS — resolving an overlap between two meetings" },
+          { src: "/darma/seq-ios-cc-scroll.webp", alt: "Darma iOS — Command & Control, with a scheduling conflict flagged" },
         ],
       },
       {
