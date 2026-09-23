@@ -13,9 +13,29 @@ export const home = {
     intro:
       "A few projects from the last few years. Some I can show. Some I can't. Click through for the full case study.",
     projects: [
-      { n: "01", title: "Darma", meta: "AI-native product · Web · iOS", href: "/work/darma" },
-      { n: "02", title: "CaixaBank", meta: "Banking · Fintech · Complex systems", href: "/work/caixabank" },
-      { n: "03", title: "Strands", meta: "B2B fintech · White-label banking tech", href: "/work/strands" },
+      {
+        n: "01",
+        title: "Darma",
+        meta: "AI-native product · Web · iOS",
+        href: "/work/darma",
+        mockups: [
+          { src: "/darma/cc-resolve-overlap.webp", alt: "Darma iOS — resolving an overlap between two meetings" },
+        ],
+      },
+      {
+        n: "02",
+        title: "CaixaBank",
+        meta: "Banking · Fintech · Complex systems",
+        href: "/work/caixabank",
+        mockups: [{ src: "/caixabank/home.png", alt: "CaixaBank app — accounts, cards and daily spending" }],
+      },
+      {
+        n: "03",
+        title: "Strands",
+        meta: "B2B fintech · White-label banking tech",
+        href: "/work/strands",
+        mockups: [{ src: "/strands/state-1.webp", alt: "Strands Moneybox — a savings goal on track", locked: true }],
+      },
     ],
   },
 

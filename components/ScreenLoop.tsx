@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import LockOverlay from "./LockOverlay";
+import { phoneFrame } from "@/lib/mockup";
 
 type ScreenLoopProps = {
   frames: string[];
@@ -57,7 +59,7 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
       className={`group relative w-full select-none overflow-hidden bg-white ${
         card
           ? "aspect-[7/14] rounded-lg border border-ink/10"
-          : "aspect-[480/984] rounded-[1.6rem] border-[5px] border-ink shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)]"
+          : phoneFrame
       } ${locked ? "cursor-default" : "pointer-events-none"} ${className}`}
     >
       {mode === "fade" &&
@@ -106,27 +108,7 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
         </>
       )}
 
-      {locked && (
-        <>
-          <div
-            aria-hidden
-            className={`absolute inset-0 bg-white/[0.06] transition-[backdrop-filter] duration-300 ease-out ${
-              card ? "backdrop-blur-[1.5px] group-hover:backdrop-blur-[1px]" : "backdrop-blur-[3px] group-hover:backdrop-blur-[2px]"
-            }`}
-          />
-          <svg
-            aria-hidden
-            viewBox="0 0 24 24"
-            fill="none"
-            className={`absolute rounded-full bg-white/50 text-ink/60 opacity-70 transition-opacity duration-300 ease-out group-hover:opacity-100 ${
-              card ? "right-1 top-1 h-3 w-3 p-[1.5px]" : "right-2 top-2 h-[18px] w-[18px] p-[3px]"
-            }`}
-          >
-            <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" strokeWidth="2" />
-            <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </>
-      )}
+      {locked && <LockOverlay variant={card ? "card" : "phone"} />}
     </div>
   );
 }

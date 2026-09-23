@@ -3,12 +3,18 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { PanelObserverProvider, usePanelObserver } from "@/lib/panel-observer";
+import { useSectionObserver } from "@/lib/section-observer";
 
 function LeftRail() {
   const { active } = usePanelObserver();
+  const { activeDark } = useSectionObserver();
 
   return (
-    <div className="sticky top-0 z-[60] hidden h-screen flex-col justify-center px-6 md:flex">
+    <div
+      className={`sticky top-0 z-[60] hidden h-screen flex-col justify-center px-6 transition-colors duration-300 md:flex ${
+        activeDark ? "bg-paper-dark" : ""
+      }`}
+    >
       <AnimatePresence mode="wait">
         {active && (
           <motion.div
@@ -21,7 +27,11 @@ function LeftRail() {
             <p className="font-serif text-7xl italic leading-none text-accent-warm md:text-8xl">
               {active.number.replace(/\s*—\s*$/, "")}
             </p>
-            <p className="mt-4 text-xs font-medium uppercase tracking-wide text-ink-soft">
+            <p
+              className={`mt-4 text-xs font-medium uppercase tracking-wide transition-colors duration-300 ${
+                activeDark ? "text-ink-dark/70" : "text-ink-soft"
+              }`}
+            >
               {active.label}
             </p>
           </motion.div>

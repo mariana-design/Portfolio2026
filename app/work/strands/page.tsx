@@ -10,8 +10,6 @@ import QuoteBlock from "@/components/QuoteBlock";
 import VisualPlaceholder from "@/components/VisualPlaceholder";
 import ScreenLoop from "@/components/ScreenLoop";
 import StateLoop from "@/components/StateLoop";
-import HowIWorkIntro from "@/components/HowIWorkIntro";
-import NDANote from "@/components/NDANote";
 import ReadNext from "@/components/ReadNext";
 import { strands as s } from "@/content/strands";
 
@@ -43,9 +41,6 @@ export default function StrandsPage() {
         </div>
 
         <VisualPlaceholder label="hero — Strands showcase app, web and iOS" aspect="wide" className="rounded-none" />
-
-        <HowIWorkIntro />
-        <NDANote />
 
         <PanelStack>
           <StackedPanel index={0} number="01" label={P["01"].label} title={P["01"].title} wide>
@@ -93,22 +88,7 @@ export default function StrandsPage() {
             <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.3fr_0.7fr]">
               <div>
                 <p className="text-sm text-ink-soft md:text-base">{P["03"].body[0]}</p>
-                <div className="my-6 grid grid-cols-[104px_1fr] items-center gap-6">
-                  <figure>
-                    <ScreenLoop
-                      variant="card"
-                      frames={P["03"].adjust.frames}
-                      alt={P["03"].adjust.alt}
-                      dwell={2000}
-                      fade={400}
-                      locked
-                    />
-                    <figcaption className="mt-2 text-center text-[10px] font-medium uppercase tracking-wide text-ink-soft">
-                      Adjust impact
-                    </figcaption>
-                  </figure>
-                  <p className="text-sm text-ink-soft md:text-base">{P["03"].body[1]}</p>
-                </div>
+                <p className="my-5 text-sm text-ink-soft md:text-base">{P["03"].body[1]}</p>
                 <QuoteBlock quote={P["03"].quote} className="py-4! text-left! text-xl! md:text-2xl!" />
               </div>
               <StateLoop

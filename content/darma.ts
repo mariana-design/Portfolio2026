@@ -37,6 +37,8 @@ export const darma = {
         to: "raynor@gmail.com",
         body: "Hi [Name], your 30-min meeting has been rescheduled.\nWed 29 Apr, 13:00–13:45 (Europe/Madrid)\nPreviously: Mon 11 May, 14:30–15:00\n[Org] picked this time based on your availability. Reply here if anything changes.\n— Darma, on behalf of mariana@darma.ai",
       },
+      // NDU-DU: Darma writes to the guest (raynor@gmail.com) on behalf of the organizer (mariana@darma.ai) — the
+      // recipient and the person Darma acts "on behalf of" are different people, so the signature is correct.
       line: "Email was where Darma worked. The app was where the human stayed aware.",
       quote: "I wasn't designing screens. I was designing behaviour.",
     },
@@ -48,8 +50,10 @@ export const darma = {
         subject: "Design Catch Up",
         from: "ea@askdarma.ai",
         to: "galla@darma.ai",
-        body: "Hi [Org], I found 3 times for your 45-min meeting — these all work for everyone:\nTue 28 Apr, 15:45–16:30\nWed 29 Apr, 13:00–13:45\nThu 30 Apr, 11:00–11:45\nReply with one of the times above, or any changes.\n— Darma, on behalf of [Organizer]",
+        body: "Hi [Org], I found 3 times for your 45-min meeting — these all work for everyone:\nTue 28 Apr, 15:45–16:30\nWed 29 Apr, 13:00–13:45\nThu 30 Apr, 11:00–11:45\nReply with one of the times above, or any changes.\n— Darma",
       },
+      // DU-DU: both the organizer (galla@darma.ai) and every guest use Darma, so it has direct calendar access and
+      // writes to the organizer as itself — never "on behalf of" the person it's writing to.
       certainty: [
         { label: "Said", desc: "The literal content of the thread — safe ground to act on." },
         { label: "Inferred", desc: "Reasonable context Darma can factor in, but hold loosely." },
@@ -60,8 +64,17 @@ export const darma = {
       label: "Designing the stop",
       title: "The important decision was *knowing when to stop*",
       intro:
-        "Darma could keep a negotiation going on its own — but some moments needed the human back in: when it couldn't reach an agreement, when a contact proposed something outside the rules, or when the context wasn't clear enough to act.",
-      flow: ["Negotiate", "Negotiate", "Negotiate", "Decision point", "Continue / Stop"],
+        "Not every guest uses Darma. When they don't (NDU-DU), a rejection triggers two things at once: Darma keeps the guest warm while it checks back with the organizer — then returns with an answer.",
+      fork: {
+        linear: ["Organizer delegates to Darma", "Darma proposes 3 times", "Guest rejects"],
+        holdLabel: "Darma holds the guest",
+        holdSub: "\"Give me a moment — checking with the organizer\"",
+        askLabel: "Darma asks the organizer",
+        askSub: "\"They rejected — what should I do?\"",
+        mergeLabel: "Organizer gives instructions",
+        returnLabel: "Darma resumes with the guest",
+        agreementLabel: "Agreement confirmed",
+      },
       body: "This is what that decision point looked like — on iOS and on web — a real conflict, and the choice Darma hands to the human instead of making it alone.",
       visual: "\"Resolve overlap\" screen — choosing which meeting to act on",
       quote: "Every continue was a decision Darma could make. Every stop was one it couldn't.",
@@ -70,21 +83,23 @@ export const darma = {
       label: "Command & control",
       title: "The apps became *command and control*",
       body: "iOS and web app — command and control. Conflicts flagged automatically, replies that need a decision, end-of-day recaps, and the settings that define Darma's rules — all without opening the email thread itself. Darma Chat lived only on iOS, for quick lookups — not for running the negotiation.",
-      visuals: ["iOS notification — conflict alert", "web app — resolving an overlap"],
+      screens: {
+        ios: { src: "/darma/cc-resolve-overlap.webp", alt: "Darma iOS — resolving an overlap between Team Sync and Client Review", width: 480, height: 984 },
+        web: { src: "/darma/cc-web-desktop.webp", alt: "Darma web app — resolving an overlap between Team Sync and Client Review", width: 1200, height: 979 },
+      },
       quote: "Email did the work. The apps kept the human in control.",
     },
     "06": {
       label: "Product Designer → Lead",
       title: "The product grew. So did *my role*",
-      flow: ["Product design", "Product direction", "Roadmap", "Engineering", "Product lead"],
-      body: "I worked across the entire Darma experience — concept, UX, UI, flows, copy, the marketing site, iOS, web app and email. As the product evolved, so did my role: I built the product and engineering roadmap, learned Linear, and coordinated a distributed team of six engineers across five countries, while still leading product design myself.",
-      quote: "I adapt quickly. If shipping the product meant taking on another function, I took it on.",
+      body: "I owned the creative direction of the entire product — the iOS app, the web app, and the marketing site. For a few months, I was also the engineering lead: I picked up terms I'd never needed before, learned Linear, translated priorities into tickets, and coordinated six engineers across five countries, alongside the design work itself.",
+      quote: "I wasn't just designing the product. I was building all of it.",
     },
     "07": {
       label: "GTM & outcome",
       title: "We didn't just launch it. We tested whether people would *let Darma take over*.",
-      body: "The go-to-market model gave every user 10 free meetings before needing to upgrade — most reached 8–9, meaning most users were already letting Darma run the negotiation, again and again, before they ever hit a paywall.",
-      visual: "billing screen — \"10 of 10 meetings used this month — you've reached your monthly limit\"",
+      body: "The go-to-market model gave every user 10 free meetings before needing to upgrade — and billing needed the same care as everything else: a clear meeting counter, an upgrade moment that didn't feel like a wall, and screens that explained exactly what came next.",
+      visual: { src: "/darma/gtm-billing.webp", alt: "Darma billing screen — free plan meeting counter and the upgrade to Premium", width: 560, height: 1047 },
       stats: [
         { value: "50", label: "active users" },
         { value: "98%", label: "meeting-booked rate" },

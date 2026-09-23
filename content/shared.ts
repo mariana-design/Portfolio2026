@@ -21,6 +21,3 @@ export const howIWork = {
     },
   ],
 };
-
-export const ndaNote =
-  "A lot of my work happened behind NDAs — banking, fintech and automotive projects where the screens, numbers and details aren't mine to publish. So instead of vague case studies, I've shown the thinking I can share: the systems, decisions, constraints and trade-offs behind the work.";

@@ -61,10 +61,6 @@ export const strands = {
         src: `/strands/state-${n + 1}.webp`,
         alt: `Moneybox goal in the "${caption}" state`,
       })),
-      adjust: {
-        alt: "Adjust impact: the amount to add, then the Adjust impact step showing how it changes the monthly payment or target date",
-        frames: [1, 2].map((n) => `/strands/adjust-${n}.webp`),
-      },
       quote: "If the user was going to trust us with their money, every state had to explain itself — not just the good ones.",
     },
     "04": {

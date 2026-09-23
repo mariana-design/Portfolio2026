@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { useSectionObserver } from "@/lib/section-observer";
 import { fadeUp } from "@/lib/motion";
 import DiagramFlow from "./DiagramFlow";
 import HoverLetters from "./HoverLetters";
@@ -15,8 +17,16 @@ type HomeHeroProps = {
 };
 
 export default function HomeHero({ eyebrow, name, introLead, words, footer }: HomeHeroProps) {
+  const ref = useRef<HTMLElement>(null);
+  const { register } = useSectionObserver();
+
+  useEffect(() => {
+    if (!ref.current) return;
+    return register("top", ref.current, false);
+  }, [register]);
+
   return (
-    <section id="top" className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pb-16 pt-28 md:px-12">
+    <section ref={ref} id="top" className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pb-16 pt-28 md:px-12">
       <div
         aria-hidden
         className="pointer-events-none absolute bottom-10 right-12 hidden w-[520px] opacity-[0.09] lg:block"

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useRef, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 
 type SectionObserverCtx = {
   activeId: string | null;
@@ -8,6 +8,9 @@ type SectionObserverCtx = {
   register: (id: string, el: HTMLElement, dark: boolean) => () => void;
   setPanelActive: (order: number, id: string, dark: boolean, on: boolean) => void;
 };
+
+// Vertical middle of the fixed nav bar (py-4 + ~34px of content).
+const NAV_MID = 33;
 
 const noopRegister = () => () => {};
 
@@ -21,7 +24,7 @@ const SectionObserverContext = createContext<SectionObserverCtx>({
 export function SectionObserverProvider({ children }: { children: ReactNode }) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeDark, setActiveDark] = useState(false);
-  const darkById = useRef<Map<string, boolean>>(new Map());
+  const sections = useRef<Map<string, { el: HTMLElement; dark: boolean }>>(new Map());
   const panelsByOrder = useRef<Map<number, { id: string; dark: boolean }>>(new Map());
 
   const setPanelActive = useCallback((order: number, id: string, dark: boolean, on: boolean) => {
@@ -34,20 +37,46 @@ export function SectionObserverProvider({ children }: { children: ReactNode }) {
     setActiveDark(top.dark);
   }, []);
 
-  function register(id: string, el: HTMLElement, dark: boolean) {
-    darkById.current.set(id, dark);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setActiveId(id);
-          setActiveDark(darkById.current.get(id) ?? false);
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }
+  // The nav's theme follows whichever registered section is behind the middle of the nav bar. Measured on scroll,
+  // so it is right in both directions (an observer only reports crossings and can be left holding a stale theme).
+  const recompute = useCallback(() => {
+    const y = NAV_MID;
+    for (const [id, { el, dark }] of sections.current) {
+      const r = el.getBoundingClientRect();
+      if (r.top <= y && r.bottom > y) {
+        setActiveId(id);
+        setActiveDark(dark);
+        return;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    let raf = 0;
+    const schedule = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(recompute);
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    schedule();
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [recompute]);
+
+  const register = useCallback(
+    (id: string, el: HTMLElement, dark: boolean) => {
+      sections.current.set(id, { el, dark });
+      requestAnimationFrame(recompute);
+      return () => {
+        sections.current.delete(id);
+      };
+    },
+    [recompute]
+  );
 
   return (
     <SectionObserverContext.Provider value={{ activeId, activeDark, register, setPanelActive }}>

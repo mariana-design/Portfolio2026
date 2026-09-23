@@ -1,7 +1,8 @@
 import { SectionObserverProvider } from "@/lib/section-observer";
 import FloatingNav from "@/components/FloatingNav";
 import HomeHero from "@/components/HomeHero";
-import Section from "@/components/Section";
+import ClosingStatement from "@/components/ClosingStatement";
+import HowIWorkIntro from "@/components/HowIWorkIntro";
 import WideSection from "@/components/WideSection";
 import ProjectCard from "@/components/ProjectCard";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
@@ -29,27 +30,24 @@ export default function HomePage() {
           </div>
         </WideSection>
 
+        <HowIWorkIntro />
+
         <WideSection id="says" number="”" label="Kind words" title="What people *say*">
           <TestimonialCarousel items={testimonials} />
         </WideSection>
 
-        <Section id="02" anchor="contact" number="02" label="Contact" title={home.contact.title} dark>
-          <p className="max-w-xl text-lg text-ink-dark/80">{home.contact.body}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            {home.contact.links.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="rounded-full border border-ink-dark/30 px-5 py-2 text-sm font-medium transition-colors hover:bg-ink-dark hover:text-paper-dark"
-              >
-                {l.label} ↗
-              </a>
-            ))}
-          </div>
-        </Section>
+        <ClosingStatement
+          id="02"
+          anchor="contact"
+          number="02"
+          label="Contact"
+          title={home.contact.title}
+          body={home.contact.body}
+          links={home.contact.links}
+        />
       </main>
 
-      <Footer text={home.footer} />
+      <Footer text={home.footer} dark />
     </SectionObserverProvider>
   );
 }

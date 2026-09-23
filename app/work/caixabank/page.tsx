@@ -9,10 +9,10 @@ import TagList from "@/components/TagList";
 import MetaRow from "@/components/MetaRow";
 import DiagramFlow from "@/components/DiagramFlow";
 import QuoteBlock from "@/components/QuoteBlock";
-import VisualPlaceholder from "@/components/VisualPlaceholder";
 import Filmstrip from "@/components/Filmstrip";
-import HowIWorkIntro from "@/components/HowIWorkIntro";
-import NDANote from "@/components/NDANote";
+import ScreenLoop from "@/components/ScreenLoop";
+import LockedImage from "@/components/LockedImage";
+import LayerStack from "@/components/LayerStack";
 import ReadNext from "@/components/ReadNext";
 import { caixabank as c } from "@/content/caixabank";
 
@@ -43,113 +43,95 @@ export default function CaixaBankPage() {
           </div>
         </div>
 
-        <NDANote text={c.nda} />
-
         <div className="flex justify-center bg-ink/[0.03] py-16">
-          <Image
-            src="/caixabank/home.png"
-            alt="CaixaBank home screen — accounts, cards and daily spending"
-            width={700}
-            height={2100}
-            priority
-            className="h-[70vh] w-auto rounded-3xl border border-ink/10 bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.3)]"
-          />
+          <div className="aspect-[480/984] w-[260px] overflow-hidden rounded-[1.6rem] border-[5px] border-ink bg-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)]">
+            <Image
+              src="/caixabank/home.png"
+              alt="CaixaBank home screen — accounts, cards and daily spending"
+              width={700}
+              height={2100}
+              sizes="260px"
+              priority
+              className="h-full w-full object-cover object-top"
+            />
+          </div>
         </div>
-
-        <HowIWorkIntro />
 
         <PanelStack>
           <StackedPanel index={0} number="01" label={P["01"].label} title={P["01"].title} wide>
-            <div className="grid grid-cols-1 items-start gap-x-12 gap-y-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.3fr_0.7fr]">
               <div className="space-y-4">
                 {P["01"].body.map((p) => (
                   <p key={p} className={text}>
                     {p}
                   </p>
                 ))}
+                <QuoteBlock quote={P["01"].quote} className="py-2! text-left! text-xl! md:text-2xl!" />
               </div>
-              <ol className="space-y-1 text-center">
-                {P["01"].layers.map((l, i, all) => (
-                  <li key={l}>
-                    <span
-                      className={`inline-block rounded-full border px-5 py-1.5 text-sm font-medium ${
-                        i === all.length - 1 ? "border-accent-warm text-accent-warm" : "border-ink/20"
-                      }`}
-                    >
-                      {l}
-                    </span>
-                    {i < all.length - 1 && <span className="block text-sm leading-tight text-accent-warm">↓</span>}
-                  </li>
-                ))}
-              </ol>
+              <LayerStack layers={P["01"].layers} />
             </div>
-            <QuoteBlock quote={P["01"].quote} className={compactQuote} />
           </StackedPanel>
 
           <StackedPanel index={1} number="02" label={P["02"].label} title={P["02"].title} wide>
             <p className={text}>{P["02"].intro}</p>
-            <DiagramFlow steps={P["02"].flow} compact className="my-4" />
-            <div className="grid grid-cols-1 items-start gap-x-10 gap-y-4 md:grid-cols-[0.9fr_1.1fr]">
-              <div>
-                <p className={text}>{P["02"].lead}</p>
-                <div className="my-3 divide-y divide-ink/10 border-y border-ink/10 text-sm">
-                  <div className="grid grid-cols-2 gap-3 py-2 text-xs font-medium uppercase tracking-wide text-ink-soft">
-                    {P["02"].compare.head.map((h) => (
-                      <span key={h}>{h}</span>
-                    ))}
-                  </div>
-                  {P["02"].compare.rows.map((row) => (
-                    <div key={row[0]} className="grid grid-cols-2 gap-3 py-2">
-                      <span className="text-ink-soft">{row[0]}</span>
-                      <span className="font-medium">{row[1]}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className={text}>{P["02"].after}</p>
+            <p className="mt-3 text-xs text-ink-soft/70 md:text-sm">{P["02"].context}</p>
+            <DiagramFlow steps={P["02"].flow} compact className="my-6" />
+            <div className="grid grid-cols-1 items-center gap-x-10 gap-y-6 md:grid-cols-[0.6fr_1.4fr]">
+              <div className="space-y-4">
+                <p className={text}>{P["02"].transition}</p>
+                <QuoteBlock quote={P["02"].quote} className="py-2! text-left! text-xl! md:text-2xl!" />
               </div>
               <Filmstrip frames={P["02"].frames} />
             </div>
-            <QuoteBlock quote={P["02"].quote} className={compactQuote} />
           </StackedPanel>
 
           <StackedPanel index={2} number="03" label={P["03"].label} title={P["03"].title} wide>
-            <DiagramFlow steps={P["03"].flow} compact className="mb-5" />
-            <div className="grid grid-cols-1 items-start gap-x-12 gap-y-4 md:grid-cols-2">
-              <p className={text}>{P["03"].body}</p>
-              <div>
+            <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.3fr_0.7fr]">
+              <div className="space-y-4">
+                <p className={text}>{P["03"].body}</p>
                 <p className={text}>{P["03"].after}</p>
-                <div className="mt-3 flex gap-3">
-                  {P["03"].questions.map((q) => (
-                    <span key={q} className="rounded-full border border-accent-warm px-4 py-1.5 text-sm font-medium text-accent-warm">
-                      {q}
-                    </span>
-                  ))}
-                </div>
+                <QuoteBlock quote={P["03"].quote} className="py-2! text-left! text-xl! md:text-2xl!" />
               </div>
+              <figure className="mx-auto w-full max-w-[210px]">
+                <ScreenLoop frames={P["03"].visual.frames} alt={P["03"].visual.alt} dwell={1900} fade={400} locked />
+                <figcaption className="mt-3 text-center text-[10px] font-medium uppercase tracking-wide text-ink-soft md:text-xs">
+                  {P["03"].visual.caption}
+                </figcaption>
+              </figure>
             </div>
-            <QuoteBlock quote={P["03"].quote} className={compactQuote} />
           </StackedPanel>
 
-          <StackedPanel index={3} number="04" label={P["04"].label} title={P["04"].title} wide>
-            <div className="grid grid-cols-1 items-start gap-x-12 gap-y-6 md:grid-cols-2">
+          <StackedPanel index={3} number="04" label={P["04"].label} title={P["04"].title} dark wide>
+            <div className="grid grid-cols-1 items-center gap-x-12 gap-y-6 md:grid-cols-2">
               <div className="space-y-4">
                 {P["04"].body.map((p) => (
-                  <p key={p} className={text}>
+                  <p key={p} className="text-base text-ink-dark/80 md:text-lg">
                     {p}
                   </p>
                 ))}
               </div>
-              <VisualPlaceholder label={P["04"].visual} aspect="video" />
+              <LockedImage src={P["04"].visual.src} alt={P["04"].visual.alt} width={1600} height={841} />
             </div>
             <QuoteBlock quote={P["04"].quote} className={compactQuote} />
           </StackedPanel>
 
           <StackedPanel index={4} number="05" label={P["05"].label} title={P["05"].title} wide>
-            <div className="grid grid-cols-1 items-start gap-x-12 gap-y-6 md:grid-cols-2">
-              <p className={text}>{P["05"].body}</p>
-              <VisualPlaceholder label={P["05"].visual} aspect="video" />
+            <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.3fr_0.7fr]">
+              <div className="space-y-4">
+                <p className={text}>{P["05"].body}</p>
+                <QuoteBlock quote={P["05"].quote} className="py-2! text-left! text-xl! md:text-2xl!" />
+              </div>
+              <div className="mx-auto aspect-[480/984] w-full max-w-[210px] overflow-hidden rounded-[1.6rem] border-[5px] border-ink bg-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.4)]">
+                <Image
+                  src={P["05"].visual.src}
+                  alt={P["05"].visual.alt}
+                  width={560}
+                  height={1211}
+                  sizes="220px"
+                  className="h-full w-full object-cover object-top"
+                />
+              </div>
             </div>
-            <QuoteBlock quote={P["05"].quote} className={compactQuote} />
           </StackedPanel>
 
           <StackedPanel index={5} number="06" label={P["06"].label} title={P["06"].title} last>
