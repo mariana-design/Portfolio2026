@@ -66,7 +66,13 @@ export const darma = {
       intro:
         "Not every guest uses Darma. When they don't (NDU-DU), a rejection triggers two things at once: Darma keeps the guest warm while it checks back with the organizer — then returns with an answer.",
       fork: {
-        linear: ["Organizer delegates to Darma", "Darma proposes 3 times", "Guest rejects"],
+        linear: [
+          "Organizer delegates to Darma",
+          "Darma proposes 3 times",
+          "Guest negotiates",
+          "Darma sends 3 new proposals",
+          "Guest rejects",
+        ],
         holdLabel: "Darma holds the guest",
         holdSub: "\"Give me a moment — checking with the organizer\"",
         askLabel: "Darma asks the organizer",
@@ -84,8 +90,13 @@ export const darma = {
       title: "The apps became *command and control*",
       body: "iOS and web app — command and control. Conflicts flagged automatically, replies that need a decision, end-of-day recaps, and the settings that define Darma's rules — all without opening the email thread itself. Darma Chat lived only on iOS, for quick lookups — not for running the negotiation.",
       screens: {
-        ios: { src: "/darma/cc-resolve-overlap.webp", alt: "Darma iOS — resolving an overlap between Team Sync and Client Review", width: 480, height: 984 },
-        web: { src: "/darma/cc-web-desktop.webp", alt: "Darma web app — resolving an overlap between Team Sync and Client Review", width: 1200, height: 979 },
+        iosScroll: { src: "/darma/seq-ios-cc-scroll.webp", alt: "Darma iOS home screen — conflicts flagged at the top, scrolling down into the Email scheduling states: Needs your reply, In progress, Booked", width: 480, height: 1283 },
+        iosTabBar: { src: "/darma/seq-ios-cc-tabbar.webp", alt: "Darma iOS tab bar — Home, Chat, Calendar", width: 480, height: 122 },
+        web: [
+          { src: "/darma/seq-web-1-select.webp", alt: "Darma web app — choosing Suggest new time for the Team Sync conflict", width: 1100, height: 900 },
+          { src: "/darma/seq-web-2-times.webp", alt: "Darma web app — selecting one of 4 proposed times", width: 1100, height: 900 },
+          { src: "/darma/seq-web-3-confirmed.webp", alt: "Darma web app — conflict resolved confirmation", width: 1100, height: 900 },
+        ],
       },
       quote: "Email did the work. The apps kept the human in control.",
     },
@@ -99,7 +110,11 @@ export const darma = {
       label: "GTM & outcome",
       title: "We didn't just launch it. We tested whether people would *let Darma take over*.",
       body: "The go-to-market model gave every user 10 free meetings before needing to upgrade — and billing needed the same care as everything else: a clear meeting counter, an upgrade moment that didn't feel like a wall, and screens that explained exactly what came next.",
-      visual: { src: "/darma/gtm-billing.webp", alt: "Darma billing screen — free plan meeting counter and the upgrade to Premium", width: 560, height: 1047 },
+      visuals: [
+        { src: "/darma/seq-billing-1-free.webp", alt: "Darma billing — Free plan at its 10-meeting monthly limit, with the upgrade to Premium", width: 480, height: 984 },
+        { src: "/darma/seq-billing-2-premium.webp", alt: "Darma billing — Premium plan active, with plan details and payment method", width: 480, height: 984 },
+        { src: "/darma/seq-billing-3-downgrade.webp", alt: "Darma billing — Premium plan set to downgrade to Free, showing what the user would lose", width: 480, height: 984 },
+      ],
       stats: [
         { value: "50", label: "active users" },
         { value: "98%", label: "meeting-booked rate" },

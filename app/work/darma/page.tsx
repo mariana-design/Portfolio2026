@@ -108,16 +108,16 @@ export default function DarmaPage() {
             <div className="max-w-2xl">
               <p className="text-base text-ink-dark/80 md:text-lg">{P["04"].intro}</p>
             </div>
-            <ForkMergeFlow {...P["04"].fork} dark className="my-3" />
+            <ForkMergeFlow {...P["04"].fork} dark className="mt-6 mb-6" />
             <div className="max-w-2xl">
               <p className="text-base text-ink-dark/80 md:text-lg">{P["04"].body}</p>
-              <QuoteBlock quote={P["04"].quote} className="py-1! mt-2! text-left! text-xl! md:text-2xl!" />
+              <QuoteBlock quote={P["04"].quote} className="py-0! mt-1! text-left! text-xl! md:text-2xl!" />
             </div>
           </StackedPanel>
 
           <StackedPanel index={4} number="05" label={P["05"].label} title={P["05"].title} wide>
             <p className="-mt-2 max-w-3xl text-base text-ink-soft md:text-lg">{P["05"].body}</p>
-            <DarmaScreens ios={P["05"].screens.ios} web={P["05"].screens.web} className="mt-3" />
+            <DarmaScreens iosScroll={P["05"].screens.iosScroll} iosTabBar={P["05"].screens.iosTabBar} web={P["05"].screens.web} className="mt-3" />
             <QuoteBlock quote={P["05"].quote} className="py-0! mt-2! mx-0! max-w-3xl! text-left! text-xl! md:text-2xl!" />
           </StackedPanel>
 
@@ -133,7 +133,7 @@ export default function DarmaPage() {
                 <StatBlock stats={P["07"].stats} className="mt-8" />
               </div>
               <div className="flex flex-col items-center">
-                <BillingPan visual={P["07"].visual} />
+                <BillingPan visuals={P["07"].visuals} />
                 <p className="mt-3 text-[10px] font-medium uppercase tracking-wide text-ink-soft">iOS — billing</p>
               </div>
             </div>

@@ -14,7 +14,7 @@ export default function DarmaHeroVisual({ className = "" }: { className?: string
         <WordCycler words={["reads it.", "proposes.", "negotiates.", "confirms."]} className="text-3xl md:text-5xl" />
       </p>
       <DiagramFlow
-        steps={["Email arrives", "Darma reads it", "Proposes 3 times", "Guest replies", "Agreement confirmed"]}
+        steps={["Email arrives", "Organizer delegates to Darma", "Darma reads it", "Proposes 3 times", "Guest replies", "Agreement confirmed"]}
         className="mt-14 w-full max-w-4xl"
       />
     </div>
