@@ -7,7 +7,7 @@ import StackedPanel from "@/components/StackedPanel";
 import TagList from "@/components/TagList";
 import MetaRow from "@/components/MetaRow";
 import QuoteBlock from "@/components/QuoteBlock";
-import VisualPlaceholder from "@/components/VisualPlaceholder";
+import StrandsHeroVisual from "@/components/StrandsHeroVisual";
 import ScreenLoop from "@/components/ScreenLoop";
 import StateLoop from "@/components/StateLoop";
 import ReadNext from "@/components/ReadNext";
@@ -36,11 +36,20 @@ export default function StrandsPage() {
                 <p key={p}>{p}</p>
               ))}
             </div>
-            <MetaRow items={s.meta} className="md:grid-cols-2!" />
+            <div>
+              <MetaRow items={s.meta} className="md:grid-cols-2!" />
+              <p className="mt-6 flex items-start gap-2 text-sm text-ink-soft">
+                <svg aria-hidden viewBox="0 0 24 24" fill="none" className="mt-0.5 h-4 w-4 shrink-0 text-ink-soft">
+                  <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" strokeWidth="2" />
+                  <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+                {s.ndaNote}
+              </p>
+            </div>
           </div>
         </div>
 
-        <VisualPlaceholder label="hero — Strands showcase app, web and iOS" aspect="wide" className="rounded-none" />
+        <StrandsHeroVisual />
 
         <PanelStack>
           <StackedPanel index={0} number="01" label={P["01"].label} title={P["01"].title} wide>
@@ -63,7 +72,7 @@ export default function StrandsPage() {
           </StackedPanel>
 
           <StackedPanel index={1} number="02" label={P["02"].label} title={P["02"].title} wide>
-            <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.4fr_0.6fr]">
+            <div className="grid grid-cols-1 items-start gap-x-14 gap-y-8 md:grid-cols-[1.4fr_0.6fr]">
               <div>
                 <p className={text}>{P["02"].body}</p>
                 <QuoteBlock quote={P["02"].quote} className="py-6! text-left! text-xl! md:text-2xl!" />
@@ -85,7 +94,7 @@ export default function StrandsPage() {
           </StackedPanel>
 
           <StackedPanel index={2} number="03" label={P["03"].label} title={P["03"].title} wide>
-            <div className="grid grid-cols-1 items-center gap-x-14 gap-y-8 md:grid-cols-[1.3fr_0.7fr]">
+            <div className="grid grid-cols-1 items-start gap-x-14 gap-y-8 md:grid-cols-[1.3fr_0.7fr]">
               <div>
                 <p className="text-sm text-ink-soft md:text-base">{P["03"].body[0]}</p>
                 <p className="my-5 text-sm text-ink-soft md:text-base">{P["03"].body[1]}</p>
@@ -104,13 +113,6 @@ export default function StrandsPage() {
             <QuoteBlock quote={P["04"].quote} className="py-8!" />
           </StackedPanel>
         </PanelStack>
-
-        <div className="px-6 py-24 md:px-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">{renderEmphasis(s.closing.title)}</h2>
-            <p className="mt-8 text-lg text-ink-soft">{s.closing.body}</p>
-          </div>
-        </div>
 
         <ReadNext {...s.next} />
       </main>

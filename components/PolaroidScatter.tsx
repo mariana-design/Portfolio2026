@@ -21,14 +21,14 @@ export default function PolaroidScatter({ photos, className = "" }: PolaroidScat
       whileInView="visible"
       viewport={revealViewport}
       variants={staggerContainer}
-      className={`flex flex-wrap items-center justify-center py-6 ${className}`}
+      className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-8 py-6 md:gap-0 ${className}`}
     >
       {photos.map((p, i) => (
         <motion.figure
           key={i}
           variants={fadeUp}
           style={{ rotate: angle(i), y: lift(i), zIndex: i }}
-          className="relative -ml-6 w-44 shrink-0 bg-white p-3 pb-10 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] transition-[transform,box-shadow] duration-300 first:ml-0 hover:!z-50 hover:scale-105 hover:!rotate-0 md:-ml-10 md:w-60"
+          className="relative w-[42vw] max-w-44 shrink-0 bg-white p-3 pb-16 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] transition-[transform,box-shadow] duration-300 hover:!z-50 hover:scale-105 hover:!rotate-0 md:-ml-10 md:w-60 md:max-w-none md:pb-10 md:first:ml-0"
         >
           {p.src ? (
             <>

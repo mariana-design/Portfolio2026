@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useSectionObserver } from "@/lib/section-observer";
-import { fadeUp } from "@/lib/motion";
-import DiagramFlow from "./DiagramFlow";
+import { fadeUp, revealViewport } from "@/lib/motion";
 import HoverLetters from "./HoverLetters";
 import WordCycler from "./WordCycler";
 
@@ -22,22 +21,16 @@ export default function HomeHero({ eyebrow, name, introLead, words, footer }: Ho
 
   useEffect(() => {
     if (!ref.current) return;
-    return register("top", ref.current, false);
+    return register("hero", ref.current, false);
   }, [register]);
 
   return (
-    <section ref={ref} id="top" className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pb-16 pt-28 md:px-12">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-10 right-12 hidden w-[520px] opacity-[0.09] lg:block"
-      >
-        <DiagramFlow steps={["Problem", "People", "Constraints", "Decision", "Interface"]} />
-      </div>
-
+    <section ref={ref} className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pb-16 pt-28 md:px-12">
       <motion.div
         initial="hidden"
-        animate="visible"
-        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.85 } } }}
+        whileInView="visible"
+        viewport={revealViewport}
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
         className="relative w-full"
       >
         <motion.p variants={fadeUp} className="text-xs font-medium tracking-wide text-ink-soft md:text-sm">
@@ -56,11 +49,12 @@ export default function HomeHero({ eyebrow, name, introLead, words, footer }: Ho
 
       <motion.p
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
+        whileInView={{ opacity: 1 }}
+        viewport={revealViewport}
+        transition={{ delay: 0.3, duration: 0.8 }}
         className="relative mt-16 w-full text-xs tracking-wide text-ink-soft"
       >
-        {footer} ↓
+        {footer}
       </motion.p>
     </section>
   );

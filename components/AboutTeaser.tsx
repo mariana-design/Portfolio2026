@@ -36,7 +36,7 @@ export default function AboutTeaser({ title, body, cta, href, cover }: AboutTeas
           </div>
           <div className="relative h-[26rem] overflow-hidden rounded-2xl transition-transform duration-500 ease-out group-hover:-rotate-1 group-hover:scale-[1.02] md:h-[34rem]">
             {cover ? (
-              <Image src={cover} alt="Mariana" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+              <Image src={cover} alt="Mariana" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover grayscale" />
             ) : (
               <VisualPlaceholder label="photo of Mariana" className="aspect-auto! h-full" />
             )}

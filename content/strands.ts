@@ -12,6 +12,7 @@ export const strands = {
     { label: "Platform", value: "Web · iOS" },
     { label: "Status", value: "Internal tool, used to sell to banks" },
   ],
+  ndaNote: "This product is under NDA — screens throughout this case study are shown behind a frosted lock rather than in full detail.",
 
   panels: {
     "01": {
@@ -69,11 +70,6 @@ export const strands = {
       body: "Every screen had to work for whichever bank licensed it next — different currencies, different rules, different brand. I couldn't design for one user; I had to design for a system flexible enough to become anyone's app.",
       quote: "The interface wasn't the client. The client was whoever hadn't signed yet.",
     },
-  },
-
-  closing: {
-    title: "Design without a *single, definite user*",
-    body: "Strands taught me to design without a single, definite user in front of me — and to design for what happens after the happy path, not just the demo screen. A savings goal that's expired, or a withdrawal that changes someone's monthly plan, needed just as much care as the moment it's created. Building for a demo that had to convince a room of bankers, and for a product a real bank would eventually hand to millions of customers who'd never know my name was on it.",
   },
 
   next: {

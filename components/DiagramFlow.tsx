@@ -12,7 +12,7 @@ type DiagramFlowProps = {
 
 const SIZES = {
   regular: { nodeH: 46, gap: 44, pad: 6, charW: 7.4, minW: 72, padW: 36, font: 13, head: 5, minSvg: 520 },
-  compact: { nodeH: 38, gap: 22, pad: 4, charW: 6.3, minW: 54, padW: 24, font: 11, head: 4, minSvg: 0 },
+  compact: { nodeH: 38, gap: 22, pad: 4, charW: 6.3, minW: 54, padW: 24, font: 11, head: 4, minSvg: 420 },
 };
 
 function seeded(seed: string) {

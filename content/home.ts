@@ -1,10 +1,16 @@
 export const home = {
+  entry: {
+    rows: ["PRODUCT DESIGNER", "UX/UI DESIGNER", "CREATIVE STRATEGIST"],
+    cursorPhoto: "/hero/cursor-portrait.webp",
+    scrollCue: "Scroll to explore",
+  },
+
   hero: {
     eyebrow: "SENIOR PRODUCT DESIGNER & STRATEGIST — BARCELONA",
     name: "Mariana Benítez",
-    introLead: "Industrial engineer turned product",
+    introLead: "Industrial design engineer turned product",
     words: ["designer", "strategist", "builder"],
-    footer: "MB. — PORTFOLIO 2026 · SCROLL TO EXPLORE",
+    footer: "MB. — PORTFOLIO 2026",
   },
 
   work: {
@@ -31,13 +37,17 @@ export const home = {
         title: "CaixaBank",
         meta: "Banking · Fintech · Complex systems",
         href: "/work/caixabank",
-        mockups: [{ src: "/caixabank/home.png", alt: "CaixaBank app — accounts, cards and daily spending" }],
+        mockups: [
+          { src: "/caixabank/home-cover.webp", alt: "CaixaBank app — accounts, cards and daily spending", raw: true },
+        ],
       },
       {
         n: "03",
         title: "Strands",
         meta: "B2B fintech · White-label banking tech",
         href: "/work/strands",
+        tone: "dark",
+        badge: "Under NDA",
         mockups: [{ src: "/strands/state-1.webp", alt: "Strands Moneybox — a savings goal on track", locked: true }],
       },
     ],
