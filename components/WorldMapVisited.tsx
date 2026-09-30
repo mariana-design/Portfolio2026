@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useRef, useState, type PointerEvent } from "react";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { worldBase, worldCountries, worldSize } from "@/content/worldMap";
 
 type WorldMapVisitedProps = {
@@ -9,24 +9,43 @@ type WorldMapVisitedProps = {
   className?: string;
 };
 
-// Pixels the cursor/finger must travel (in any direction) to reveal one more country —
-// makes it feel like tracing/drawing rather than sweeping to an x-position.
+// Pixels the cursor must travel (in any direction) to reveal one more country — makes it feel like
+// tracing/drawing rather than sweeping to an x-position. Mouse/desktop only.
 const PX_PER_COUNTRY = 55;
+// Touch/mobile: no hover, no drag — it just draws itself once scrolled into view, one country every
+// AUTO_STEP_MS.
+const AUTO_STEP_MS = 90;
 
 export default function WorldMapVisited({ countries, className = "" }: WorldMapVisitedProps) {
   const n = countries.length;
   const ref = useRef<HTMLDivElement>(null);
-  // step = how many countries are drawn (0..n). Blank until the visitor moves the mouse/finger over it.
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  // step = how many countries are drawn (0..n). Blank until revealed (hover/drag on desktop, auto on touch).
   const [step, setStep] = useState(0);
   const traveled = useRef(0);
   const lastPoint = useRef<{ x: number; y: number } | null>(null);
-  const dragging = useRef(false);
+  const [isTouch, setIsTouch] = useState(false);
 
-  // Mouse reveals on hover, same as before. Touch has no hover, so it only reveals while actively
-  // dragging a finger across the map (pointerdown → pointermove → pointerup), which is the touch
-  // equivalent of "moving the mouse over it".
+  useEffect(() => {
+    setIsTouch(!window.matchMedia("(pointer: fine)").matches);
+  }, []);
+
+  // Touch/mobile: once the map scrolls into view, draw every country automatically — no interaction
+  // needed, since there's no hover and asking for a drag gesture here didn't read well on mobile.
+  useEffect(() => {
+    if (!isTouch || !inView) return;
+    let i = 0;
+    const id = setInterval(() => {
+      i += 1;
+      setStep(Math.min(n, i));
+      if (i >= n) clearInterval(id);
+    }, AUTO_STEP_MS);
+    return () => clearInterval(id);
+  }, [isTouch, inView, n]);
+
+  // Desktop: reveals on hover-move, same as before.
   const handleMove = (e: PointerEvent<SVGSVGElement>) => {
-    if (e.pointerType === "touch" && !dragging.current) return;
+    if (e.pointerType !== "mouse") return;
     const point = { x: e.clientX, y: e.clientY };
     if (lastPoint.current) {
       const dx = point.x - lastPoint.current.x;
@@ -37,20 +56,8 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
     setStep(Math.min(n, Math.floor(traveled.current / PX_PER_COUNTRY)));
   };
 
-  const handleDown = (e: PointerEvent<SVGSVGElement>) => {
-    if (e.pointerType !== "touch") return;
-    dragging.current = true;
-    lastPoint.current = { x: e.clientX, y: e.clientY };
-    e.currentTarget.setPointerCapture(e.pointerId);
-  };
-
-  const handleUp = () => {
-    dragging.current = false;
-    lastPoint.current = null;
-  };
-
   const handleLeave = (e: PointerEvent<SVGSVGElement>) => {
-    if (e.pointerType === "touch") return;
+    if (e.pointerType !== "mouse") return;
     lastPoint.current = null;
   };
 
@@ -62,14 +69,15 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
     <div ref={ref} className={className}>
       <svg
         viewBox={`0 0 ${worldSize.w} ${worldSize.h}`}
-        className="h-auto w-full max-w-full cursor-crosshair touch-none select-none"
+        className={`h-auto w-full max-w-full select-none ${isTouch ? "" : "cursor-crosshair"}`}
         role="img"
-        aria-label={`World map, ${n} visited countries — move the mouse, or drag a finger on touch, to reveal them`}
-        onPointerMove={handleMove}
-        onPointerDown={handleDown}
-        onPointerUp={handleUp}
-        onPointerCancel={handleUp}
-        onPointerLeave={handleLeave}
+        aria-label={
+          isTouch
+            ? `World map, ${n} visited countries, drawing in automatically`
+            : `World map, ${n} visited countries — move the mouse to reveal them`
+        }
+        onPointerMove={isTouch ? undefined : handleMove}
+        onPointerLeave={isTouch ? undefined : handleLeave}
       >
         <path d={worldBase} fill="#d4d4d8" stroke="#a1a1aa" strokeWidth={0.4} />
 
@@ -118,7 +126,7 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
       </svg>
 
       <div className="mt-6 flex items-baseline justify-between gap-6">
-        <p className="text-sm text-ink-soft">Move the mouse, or drag a finger, to discover where I've traveled</p>
+        <p className="text-sm text-ink-soft">{isTouch ? "Where I've traveled" : "Move the mouse to discover where I've traveled"}</p>
         <p className="font-serif text-lg italic tabular-nums text-ink-soft" aria-live="polite">
           {String(step).padStart(2, "0")}/{String(n).padStart(2, "0")}
         </p>

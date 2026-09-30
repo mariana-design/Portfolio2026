@@ -51,7 +51,7 @@ export default function WideSection({
     <section
       ref={ref}
       id={anchor}
-      className={`px-6 py-28 md:px-12 ${dark ? "bg-paper-dark text-ink-dark" : "bg-paper text-ink"} ${className}`}
+      className={`px-6 py-14 md:px-12 md:py-28 ${dark ? "bg-paper-dark text-ink-dark" : "bg-paper text-ink"} ${className}`}
     >
       <motion.div initial="hidden" whileInView="visible" viewport={sectionViewport} variants={fadeUp}>
         <div className={`mb-12 flex flex-col gap-3 md:flex-row md:items-end md:gap-8 ${center ? "items-center text-center md:flex-col md:items-center" : ""}`}>
