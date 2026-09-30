@@ -46,7 +46,7 @@ export const home = {
         title: "Strands",
         meta: "B2B fintech · White-label banking tech",
         href: "/work/strands",
-        tone: "dark",
+        tone: "dark" as const,
         badge: "Under NDA",
         mockups: [{ src: "/strands/state-1.webp", alt: "Strands Moneybox — a savings goal on track", locked: true }],
       },
