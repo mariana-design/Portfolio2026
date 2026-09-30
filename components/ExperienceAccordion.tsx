@@ -8,7 +8,7 @@ type Entry = {
   company: string;
   role: string;
   dates: string;
-  body: string;
+  body?: string;
   bullets?: string[];
 };
 
@@ -73,7 +73,7 @@ export default function ExperienceAccordion({ label, items, className = "" }: Ex
                     className="overflow-hidden"
                   >
                     <div className="max-w-2xl pb-8 text-lg text-ink-soft">
-                      <p>{e.body}</p>
+                      {e.body && <p>{e.body}</p>}
                       {e.bullets && (
                         <ul className="mt-3 space-y-1">
                           {e.bullets.map((b) => (

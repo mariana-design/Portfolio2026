@@ -131,15 +131,16 @@ function MobileFeed({ items }: { items: PersonalityItem[] }) {
             className="w-[82vw] shrink-0 snap-start rounded-2xl border border-ink/10 bg-ink/[0.02] p-5"
           >
             {item.photos && item.photos.length > 0 && (
-              <div className="mb-5 flex gap-2">
+              // One fixed-aspect frame per card, sliced into equal columns for however many photos
+              // there are — so a 1-photo and a 2-or-3-photo card take up the exact same size/shape,
+              // instead of multi-photo cards shrinking to half-height and looking out of place.
+              <div
+                className="mb-5 grid aspect-[3/4] gap-1 overflow-hidden rounded-xl shadow-[0_10px_24px_-12px_rgba(0,0,0,0.35)]"
+                style={{ gridTemplateColumns: `repeat(${item.photos.length}, 1fr)` }}
+              >
                 {item.photos.map((p) => (
-                  <div
-                    key={p.src}
-                    className="aspect-[3/4] w-full min-w-0 shrink overflow-hidden rounded-xl shadow-[0_10px_24px_-12px_rgba(0,0,0,0.35)]"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.src} alt={p.alt} className="h-full w-full object-cover" />
-                  </div>
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={p.src} src={p.src} alt={p.alt} className="h-full w-full object-cover" />
                 ))}
               </div>
             )}

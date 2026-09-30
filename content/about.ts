@@ -9,7 +9,6 @@ export const about = {
       company: "Darma",
       role: "Product Strategist & Designer — AI-native product",
       dates: "Jul 2025 — Present",
-      body: "Barcelona",
       bullets: [
         "Led end-to-end UX design of an AI executive assistant at an early-stage startup, from onboarding and authentication flows to account management and email scheduling, with full product ownership and direct collaboration with the CEO, COO, and a team of 8 engineers.",
         "Owned product strategy and roadmap prioritization, ruthlessly prioritizing based on user impact and engineering capacity; ran sprint planning and retros to maintain delivery velocity in a distributed, early-stage team.",
@@ -21,7 +20,6 @@ export const about = {
       company: "Fail Fast Studio · CaixaBank",
       role: "UX/UI Product Designer",
       dates: "May 2024 — Jul 2025",
-      body: "Barcelona",
       bullets: [
         "Led the design and implementation of new features in CaixaBank's app, collaborating with cross-functional teams to improve user experience.",
         "Created user-centric interfaces to enhance accessibility and boost engagement across platforms.",
@@ -32,7 +30,6 @@ export const about = {
       company: "Strands",
       role: "UX/UI Product Designer",
       dates: "Apr 2023 — May 2024",
-      body: "Barcelona",
       bullets: [
         "Developed and implemented design solutions for multiple product lines, improving UX/UI across platforms.",
         "Drove the adoption of design thinking within the organization to enhance project delivery and collaboration.",
@@ -43,7 +40,6 @@ export const about = {
       company: "SEAT & CUPRA",
       role: "Digital Service Designer",
       dates: "Oct 2022 — Apr 2023",
-      body: "Barcelona",
       bullets: [
         "Led the full end-to-end service design process, from user research to implementation, for multiple products.",
         "Conducted user research to improve user flows and collaborated with engineers to ensure smooth design implementation.",
@@ -54,21 +50,19 @@ export const about = {
       company: "IBM iX",
       role: "UX/UI and Service Designer",
       dates: "Oct 2021 — Oct 2022",
-      body: "Barcelona",
       bullets: ["Clients: Acciona, Logista Pharma, CTTI"],
     },
     {
       company: "Makeat",
       role: "Product & UX Designer",
       dates: "Apr 2021 — Oct 2021",
-      body: "Barcelona · Food tech / gastronomy",
+      body: "Food tech / gastronomy",
       bullets: ["Clients: Moët & Chandon, Belvedere Vodka, World Chocolate Factory"],
     },
     {
       company: "Koduz",
       role: "Project Manager & UX/UI Designer",
       dates: "Feb 2020 — Apr 2021",
-      body: "Barcelona",
     },
   ],
 
