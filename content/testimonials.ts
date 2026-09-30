@@ -9,12 +9,12 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [
   {
     short:
-      "Mariana's team was incredibly dedicated not just to the project or process, but to the users that they researched — they perfectly blended passion with compassion to focus on the needs of everyone in a fragile context of children with heart conditions.",
+      "Todo manager quiere una Mariana en su equipo. Demostró una gran madurez como profesional, capaz de gestionar complejas situaciones con gran efectividad y acierto.",
     quote:
-      "I had the privilege of mentoring Mariana and her team during the Philips Experience Design challenge as a design thinking coach. Mariana's team was incredibly dedicated not just to the project or process, but to the users that they researched — they perfectly blended passion with compassion to focus on the needs of everyone in a fragile context of children with heart conditions. Mariana was attentive and hungry to learn everything she could.",
-    emphasis: "they perfectly blended passion with compassion",
-    name: "Frances DiMare Dailey",
-    role: "Design Research & New Product Strategy — Mariana's mentor",
+      "Todo manager quiere una Mariana en su equipo. Demostró una gran madurez como profesional, capaz de gestionar complejas situaciones con gran efectividad y acierto. Se relaciona con el equipo con gran asertividad y compañerismo.",
+    emphasis: "Todo manager quiere una Mariana en su equipo.",
+    name: "Adria Guiu",
+    role: "Producto, diseño y negocio — managed Mariana directly",
   },
   {
     short:
@@ -45,11 +45,11 @@ export const testimonials: Testimonial[] = [
   },
   {
     short:
-      "Todo manager quiere una Mariana en su equipo. Demostró una gran madurez como profesional, capaz de gestionar complejas situaciones con gran efectividad y acierto.",
+      "Mariana's team was incredibly dedicated not just to the project or process, but to the users that they researched — they perfectly blended passion with compassion to focus on the needs of everyone in a fragile context of children with heart conditions.",
     quote:
-      "Todo manager quiere una Mariana en su equipo. Demostró una gran madurez como profesional, capaz de gestionar complejas situaciones con gran efectividad y acierto. Se relaciona con el equipo con gran asertividad y compañerismo.",
-    emphasis: "Todo manager quiere una Mariana en su equipo.",
-    name: "Adria Guiu",
-    role: "Producto, diseño y negocio — managed Mariana directly",
+      "I had the privilege of mentoring Mariana and her team during the Philips Experience Design challenge as a design thinking coach. Mariana's team was incredibly dedicated not just to the project or process, but to the users that they researched — they perfectly blended passion with compassion to focus on the needs of everyone in a fragile context of children with heart conditions. Mariana was attentive and hungry to learn everything she could.",
+    emphasis: "they perfectly blended passion with compassion",
+    name: "Frances DiMare Dailey",
+    role: "Design Research & New Product Strategy — Mariana's mentor",
   },
 ];

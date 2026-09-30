@@ -39,7 +39,16 @@ export default function AboutPage() {
         </section>
 
         <section className="overflow-hidden px-6 pb-24 md:px-12">
-          <PolaroidScatter photos={[{}, {}, {}, {}, {}]} />
+          <PolaroidScatter
+            photos={[
+              { src: "/about/about-mexico.webp", alt: "Mariana and a friend at ruins in Mexico", label: "Mexico, chasing ruins" },
+              { src: "/about/about-barcelona.webp", alt: "Mariana in a park in Barcelona", label: "Barcelona, most Sundays" },
+              { src: "/about/about-la2.webp", alt: "Mariana at the Beverly Hills sign", label: "LA for a week" },
+              { src: "/about/about-innout.webp", alt: "Mariana with a double-double at In-N-Out", label: "In-N-Out fan" },
+              { src: "/about/about-overlook.webp", alt: "Mariana at a sunset lookout with a friend", label: "Golden hour lookout" },
+              { src: "/about/about-waterfront.webp", alt: "Mariana by the water at sunset with a friend", label: "Evening by the water" },
+            ]}
+          />
         </section>
 
         <WideSection id="01" number="01" label="Experience" title="Where I've *worked*">
@@ -63,17 +72,15 @@ export default function AboutPage() {
         </WideSection>
 
         <WideSection id="04" number="04" label="Thinking" title="How I *think*">
-          <div className="grid grid-cols-1 gap-x-16 gap-y-16 md:grid-cols-2">
+          <p className="-mt-6 mb-12 max-w-2xl text-lg text-ink-soft md:text-xl md:leading-snug">
+            The case studies show what I did. This is how I got there — not a task list, but a sense of the judgment
+            behind each area. Four categories, four different dimensions of the same work.
+          </p>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {about.thinking.map((g) => (
-              <div key={g.group}>
-                <h3
-                  className={`font-display font-bold tracking-tight ${
-                    g.big ? "text-4xl md:text-6xl" : "text-2xl md:text-3xl"
-                  }`}
-                >
-                  {g.group}
-                </h3>
-                <ul className={`mt-5 space-y-2 text-ink-soft ${g.big ? "text-lg md:text-xl" : "text-base"}`}>
+              <div key={g.group} className="flex min-h-[16rem] flex-col rounded-2xl border border-ink/10 bg-ink/[0.02] p-6 md:min-h-[18rem]">
+                <h3 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{g.group}</h3>
+                <ul className="mt-5 space-y-2 text-base text-ink-soft">
                   {g.items.map((i) => (
                     <li key={i}>{i}</li>
                   ))}

@@ -2,7 +2,6 @@ import { SectionObserverProvider } from "@/lib/section-observer";
 import FloatingNav from "@/components/FloatingNav";
 import HomeHero from "@/components/HomeHero";
 import ClosingStatement from "@/components/ClosingStatement";
-import HowIWorkIntro from "@/components/HowIWorkIntro";
 import WideSection from "@/components/WideSection";
 import ProjectCard from "@/components/ProjectCard";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
@@ -29,8 +28,6 @@ export default function HomePage() {
             ))}
           </div>
         </WideSection>
-
-        <HowIWorkIntro />
 
         <WideSection id="says" number="”" label="Kind words" title="What people *say*">
           <TestimonialCarousel items={testimonials} />

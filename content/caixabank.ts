@@ -8,7 +8,7 @@ export const caixabank = {
   ],
   meta: [
     { label: "Role", value: "Product Designer" },
-    { label: "Team", value: "[placeholder]" },
+    { label: "Team", value: "Me (Product Designer), PM, 2 Engineers, PO" },
     { label: "Period", value: "May 2024 — Jun 2025" },
     { label: "Platform", value: "iOS · Android (CaixaBank app), some CaixaBank Business web" },
   ],
@@ -18,8 +18,8 @@ export const caixabank = {
       label: "The interface",
       title: "The screen is never *just a screen*",
       body: [
-        "Start with a simple banking interface — the accounts screen above. Nothing unusual about it: balances, cards, recent movements.",
-        "But as you scroll through anything a user does on that screen, there are layers behind it that never show up in the UI:",
+        "Take a simple banking interaction — checking a balance, tapping a card, reviewing a recent movement. Nothing unusual about it on the surface.",
+        "But behind anything a user does on that screen, there are layers that never show up in the UI:",
       ],
       layers: ["Customer", "Business rules", "Regulation", "Technical dependencies", "Validation", "Error states", "Design"],
       quote: "What looks like one interaction is usually a system of decisions.",
@@ -27,53 +27,134 @@ export const caixabank = {
     "02": {
       label: "The refund flow",
       title: "One action. *Many states*.",
-      intro: "Take the Bizum refund experience: request → conditions → confirmation → validation → processing → success/failure.",
       context:
         "The Bizum refund flow I designed sits inside a network CaixaBank uses for over 9.5 million registered users in Spain — Bizum's largest single bank by volume.",
       flow: ["Information", "Conditions", "Confirmation", "Validation", "Processing", "Success / failure"],
       transition:
-        "In banking, the happy path is never the whole story — designing the experience means designing what happens when things don't go as expected. Here's what the real screens looked like at each state:",
-      frames: [
-        { src: "/caixabank/refund-request.png", alt: "Refund request — confirming the details of a Bizum return", caption: "Information" },
-        { src: "/caixabank/refund-terms.png", alt: "Refund conditions document", caption: "Conditions" },
-        { src: "/caixabank/refund-confirm.png", alt: "Refund confirmation screen", caption: "Confirmation" },
-        { src: "/caixabank/refund-success.png", alt: "Refund completed successfully", caption: "Success" },
-        { src: "/caixabank/refund-fail.png", alt: "Refund failed state", caption: "Failure" },
+        "In banking, the happy path is never the whole story — designing the experience means designing what happens when things don't go as expected.",
+      steps: [
+        {
+          src: "/caixabank/bizum-refund-1-home.webp",
+          alt: "Bizum home — tapping into Consultar movimientos",
+          tap: { x: 0.5, y: 0.696 },
+        },
+        {
+          src: "/caixabank/bizum-refund-2-filtros.webp",
+          alt: "Recent movements — the Bizum sent to Julio A.M.",
+          tap: { x: 0.5, y: 0.5299 },
+        },
+        {
+          src: "/caixabank/bizum-refund-3-pendiente.webp",
+          alt: "Transaction detail — tapping Solicitar devolución",
+          tap: { x: 0.51, y: 0.4551 },
+        },
+        {
+          src: "/caixabank/bizum-refund-4-reconocer.webp",
+          alt: "Quick reason picker — selecting incorrect amount",
+          tap: { x: 0.5, y: 0.3283 },
+        },
+        {
+          src: "/caixabank/bizum-refund-5-reason-empty-full.webp",
+          alt: "Requesting the refund — choosing a reason",
+          tap: { x: 0.5, y: 0.9241 },
+          scroll: { fraction: 0.1133 },
+        },
+        {
+          src: "/caixabank/bizum-refund-6-reason-selected-full.webp",
+          alt: "Requesting the refund — reason selected: incorrect amount",
+          tap: { x: 0.5, y: 0.9241 },
+          scroll: { fraction: 0.1133 },
+        },
+        {
+          src: "/caixabank/bizum-refund-7-confirm-warn-full.webp",
+          alt: "Reviewing every detail — terms still need to be read and accepted",
+          tap: { x: 0.5, y: 0.9477 },
+          scroll: { fraction: 0.3451 },
+        },
+        {
+          src: "/caixabank/bizum-refund-8-terms.webp",
+          alt: "Reading the return conditions",
+          tap: { x: 0.0627, y: 0.0956 },
+        },
+        {
+          src: "/caixabank/bizum-refund-9-confirm-accept-full.webp",
+          alt: "Reviewing every detail, terms read and accepted, ready to confirm",
+          tap: { x: 0.5, y: 0.9477 },
+          scroll: { fraction: 0.3451 },
+        },
+        {
+          src: "/caixabank/bizum-refund-10-success.webp",
+          alt: "Refund completed successfully — Devolución solicitada",
+          tap: { x: 0.5, y: 0.8644 },
+        },
       ],
       quote: "This is where the complexity lives.",
     },
     "03": {
-      label: "A product I can't name yet",
-      title: "A product I *can't name yet*",
-      body: "I worked on a new payment product still in development — under NDA, so I can't share its name or show the interface. The challenge wasn't designing the final screens; it was defining how the experience worked across every moment surrounding it, since using it meant leaving CaixaBank's app entirely to set it up elsewhere, then coming back.",
-      after: "On return, two questions the design had to answer immediately: where am I, and what happens next?",
+      label: "Bizum Pay",
+      title: "*Bizum Pay* — now live",
+      body: "I worked on Bizum Pay while it was still an unnamed, unreleased payment product — under NDA, so the interface couldn't be shown at the time. It went live in September 2026, so it finally has a name and a face. The challenge was never just the final screens; it was defining how the experience worked across every moment surrounding it, since using it meant leaving CaixaBank's app entirely to activate it elsewhere, then coming back with the service ready.",
+      after: "It's Bizum's own answer to tap-to-pay: the same network 9.5 million CaixaBank users already trust for Bizum transfers, extended to pay in physical stores — no new app to learn, no new number to give out.",
       visual: {
-        alt: "Related CaixaBank screens — logging back in, pending operations waiting to be confirmed, and the accounts home",
-        frames: ["login", "pending", "home"].map((n) => `/caixabank/related-${n}.webp`),
-        caption: "Related screens, not the product",
+        alt: "Bizum Pay, live — the entry point inside Bizum, the activation screen, and the ready-to-pay state",
+        steps: [
+          {
+            src: "/caixabank/bizum-pay-1-menu.webp",
+            alt: "Bizum menu — Acceder a Bizum Pay",
+            tap: { x: 0.5, y: 0.617 },
+          },
+          {
+            src: "/caixabank/bizum-pay-2-onboarding.webp",
+            alt: "Descubre Bizum Pay — activation steps",
+            tap: { x: 0.5, y: 0.834 },
+          },
+          {
+            src: "/caixabank/bizum-pay-3-ready.webp",
+            alt: "Dispositivos vinculados — ready to activate",
+            tap: { x: 0.5, y: 0.679 },
+          },
+        ],
+        caption: "Bizum Pay — live since September 2026",
       },
-      quote: "The goal wasn't to over-explain the UI. It was to design for the disconnect a user feels when a task continues somewhere else.",
+      quote: "The goal wasn't to over-explain the UI. It was to design for the disconnect a user feels when a task continues somewhere else — and now that disconnect is something 9.5 million people can actually run into.",
     },
     "04": {
-      label: "One click, several banks",
-      title: "One click, *several banks*",
+      label: "Currency exchange",
+      title: "Buying and *selling currencies*",
       body: [
-        "Another project, similar in spirit to what Revolut offers: holding and moving money between currencies.",
-        "The screen was the easy part. The real work happened in months of meetings with business and legal: how much to charge per transaction, whether a user could hold a foreign balance, what limits applied. A single transfer has to pass through several banks before reaching its destination — each one approving its own step.",
+        "Another project, similar in spirit to what Revolut offers: buying, selling and holding foreign currencies from inside the app.",
+        "The screen was the easy part. The real work happened in months of meetings with business and legal: how much to charge per transaction, whether a user could hold a foreign balance, what limits applied. And underneath the exchange itself, a single transaction still had to pass through several banks before settling — each one approving its own step, a constraint I had to design around rather than the point of the product.",
       ],
       visual: {
         src: "/caixabank/related-flow.webp",
         alt: "A CaixaBank flow board with a decision point splitting into two paths, several screens on each",
       },
-      quote: "The transaction touched several banks. For the user, it still had to feel like pressing one button.",
+      quote: "The exchange had to feel instant. Underneath, it was anything but.",
     },
     "05": {
       label: "Bills",
       title: "Bills have *more options* than I expected",
       body: "A new world for me. I owned the UX for showing when a bill was coming, what price to expect, whether it could be split, what happens if something looks wrong, and how to stop or dispute it. Users without their bills linked to the bank needed a way to bring them in, too.",
       visual: {
-        src: "/caixabank/related-bills.webp",
-        alt: "CaixaBank shared account — the Recibos shortcut, Iberdrola and mortgage payments in the movements list, and a Fraccionar pago (split payment) link",
+        alt: "The return-reason selection, the step-2 confirmation, and the return completed",
+        steps: [
+          {
+            src: "/caixabank/bills-2-reason.webp",
+            alt: "Devolver recibo — step 1 of 2, reason selected: not authorized",
+            tap: { x: 0.5, y: 0.942 },
+          },
+          {
+            src: "/caixabank/bills-3-confirm.webp",
+            alt: "Devolver recibo — step 2 of 2, confirming every detail",
+            tap: { x: 0.5, y: 0.942 },
+          },
+          {
+            src: "/caixabank/bills-4-success.webp",
+            alt: "Recibo devuelto — return completed",
+            tap: { x: 0.5, y: 0.864 },
+          },
+        ],
+        caption: "Reason → confirm → done",
       },
       quote: "Even I, the designer, found the flow confusing — before I simplified it.",
     },

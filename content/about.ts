@@ -1,55 +1,62 @@
 export const about = {
   headline: {
     first: "I studied Industrial Design Engineering.",
-    second: "Now I design products for AI startups, banks, and *everything in between*.",
+    second: "Now I design products across banking, AI, mobility and more — *wherever the problem is genuinely hard*.",
   },
 
   experience: [
     {
       company: "Darma",
-      role: "Product Designer → Product Lead",
+      role: "Product Strategist & Designer — AI-native product",
       dates: "Jul 2025 — Present",
-      body: "An AI assistant that takes care of the meetings you give it, from the back-and-forth in your inbox to finding a time that actually works for everyone. It was my first deep dive into designing with AI. I started as a Product Designer and ended up coordinating a distributed team of six engineers across five countries, while still designing the product myself.",
+      body: "Barcelona · 1 yr 3 mo",
     },
     {
-      company: "CaixaBank",
-      role: "Product Designer, digital banking",
-      dates: "May 2024 — Jun 2025",
-      body: "Part of the internal project “Fail Fast”, working on several banking experiences:",
-      bullets: ["Bizum Pay", "Bizum refunds", "Accounts and transactions", "Card activation"],
+      company: "Fail Fast Studio · CaixaBank",
+      role: "UX/UI Product Designer",
+      dates: "May 2024 — Jul 2025",
+      body: "Barcelona · 1 yr 3 mo",
     },
     {
       company: "Strands",
-      role: "Product Designer, B2B fintech / neobank platform",
+      role: "UX/UI Product Designer",
       dates: "Apr 2023 — May 2024",
-      body: "[placeholder — details coming]",
+      body: "Barcelona · 1 yr 2 mo",
     },
     {
-      company: "Catorce",
-      role: "Product / Service Designer, design consultancy",
+      company: "SEAT & CUPRA",
+      role: "Digital Service Designer",
       dates: "Oct 2022 — Apr 2023",
-      body: "Service design work, including automotive. The role wrapped up earlier than planned, as the consultancy went through a period of restructuring and staff cuts.",
+      body: "Barcelona · 7 mo",
     },
     {
-      company: "IBM",
-      role: "Product & Service Designer",
+      company: "IBM iX",
+      role: "UX/UI and Service Designer",
       dates: "Oct 2021 — Oct 2022",
-      body: "[placeholder — details coming]",
+      body: "Barcelona · 1 yr 1 mo",
+      bullets: ["Clients: Acciona, Logista Pharma, CTTI"],
     },
     {
       company: "Makeat",
       role: "Product & UX Designer",
       dates: "Apr 2021 — Oct 2021",
-      body: "[placeholder — details coming]",
+      body: "Barcelona · 7 mo · Food tech / gastronomy",
+      bullets: ["Clients: Moët & Chandon, Belvedere Vodka, World Chocolate Factory"],
+    },
+    {
+      company: "Koduz",
+      role: "Project Manager & UX/UI Designer",
+      dates: "Feb 2020 — Apr 2021",
+      body: "Barcelona. UX/UI Designer: Feb 2020 – Apr 2021. Project Manager: Mar 2020 – Apr 2021.",
     },
   ],
 
   education: [
-    "Industrial Design Engineering — ELISAVA, 2017–2021",
-    "UI Bootcamp — Memorisely, 2023",
-    "Google UX Design Certificate — 2022–Present",
+    "Bachelor's, Industrial and Product Design & Product Management — University School of Design and Engineering of Barcelona, 2017–2021",
+    "UI Bootcamp, Industrial and Product Design — Memorisely, Apr–Jul 2023",
+    "Bilingual High School Diploma — Tecnológico de Monterrey, 2009–2012",
   ],
-  languages: ["Spanish (Native)", "English (Native)", "Catalan (B1)"],
+  languages: ["Spanish (Native)", "English (Fluent)", "Catalan (B2)"],
   skills: [
     "Product Design",
     "UX/UI Design",
@@ -77,6 +84,9 @@ export const about = {
     "Office",
     "Adobe XD",
     "Keynote",
+    "Claude Code",
+    "Claude",
+    "ChatGPT",
   ],
 
   travel: {
@@ -90,18 +100,73 @@ export const about = {
   },
 
   personality: [
-    "*6:30 AM* — gym, every single day. No excuses.",
-    "*Tacos*, tacos & tacos. Every day, all the time.",
-    "Some people eat to survive. *I survive to eat.*",
-    "I need a bigger apartment just for my *plants and flowers* — but I can't stop buying more.",
-    "*Pizza* — any type, even pineapple. Fight me.",
-    "*Speciality coffee*, always.",
-    "Started sports at 5. Basketball → volleyball → now *tennis is my thing*. Ping pong, foosball or pool after work? I'm in.",
-    "I photograph everything — *except myself*. I have maybe five photos of me total.",
-    "I build IKEA furniture and make ceramics. *If I can make it with my hands, I probably have.*",
-    "*Perfectionist*, thoughtful, enthusiastic, very optimistic. I really don't like being late.",
-    "*Hybri* — my turtle. Hybri is short for hybrid: she's part water, part land.",
-    "In Spain since September 2017. *Nine years and counting.*",
+    {
+      text: "*6:30 AM* — gym, every single day. No excuses.",
+      photos: [{ src: "/about/pc-gym.webp", alt: "Mariana at the gym" }],
+    },
+    {
+      text: "*Tacos*, tacos & tacos. Every day, all the time.",
+      photos: [
+        { src: "/about/pc-tacos1.webp", alt: "Tacos with pickled onions and crema" },
+        { src: "/about/pc-tacos2.webp", alt: "A crispy flauta with radish" },
+      ],
+    },
+    {
+      text: "Some people eat to survive. *I survive to eat.*",
+      photos: [
+        { src: "/about/pc-avotoast.webp", alt: "Avocado toast with a friend" },
+        { src: "/about/pc-food-tomatoes.webp", alt: "A platter of heirloom tomatoes" },
+        { src: "/about/pc-mole.webp", alt: "A plate of mole, rice and beans" },
+      ],
+    },
+    {
+      text: "I need a bigger apartment just for my *plants and flowers* — but I can't stop buying more.",
+      photos: [{ src: "/about/pc-plants.webp", alt: "The shower corner turned into a plant nursery" }],
+    },
+    {
+      text: "*Pizza* — any type, even pineapple. Fight me.",
+      photos: [{ src: "/about/pc-pizza.webp", alt: "A wood-fired pizza with burrata" }],
+    },
+    {
+      text: "*Speciality coffee*, always — and nowadays I'm in my *matcha era*.",
+      photos: [
+        { src: "/about/pc-coffee.webp", alt: "Two flat whites and fortune cookies" },
+        { src: "/about/pc-matcha.webp", alt: "An iced matcha from Blank Street" },
+      ],
+    },
+    {
+      text: "*Tennis* was my thing — and still is today.",
+      photos: [{ src: "/about/pc-tennis.webp", alt: "Tennis ball resting on a racket, courtside" }],
+    },
+    {
+      text: "I photograph everything — *except myself*. I have maybe five photos of me total.",
+      photos: [
+        { src: "/about/pc-doors1.webp", alt: "A grid of doors photographed on a walk" },
+        { src: "/about/pc-doors2.webp", alt: "Another grid of doors photographed on a walk" },
+      ],
+    },
+    {
+      text: "I build IKEA furniture and make ceramics. *If I can make it with my hands, I probably have.*",
+      photos: [
+        { src: "/about/pc-ceramics1.webp", alt: "A handmade ceramic cup stamped MB" },
+        { src: "/about/pc-ceramics2.webp", alt: "The inside of the handmade ceramic cup" },
+      ],
+    },
+    {
+      text: "*Perfectionist*, thoughtful, enthusiastic, very optimistic. I really don't like being late.",
+      photos: [{ src: "/about/pc-snowboard.webp", alt: "Mariana wiping out on a snowboard, mid-laugh" }],
+    },
+    {
+      text: "*Hybri* — my turtle. Hybri is short for hybrid: she's part water, part land.",
+      photos: [
+        { src: "/about/pc-turtle-baby.webp", alt: "Hybri as a baby turtle" },
+        { src: "/about/pc-turtle-grown.webp", alt: "Hybri, grown up, with a friend" },
+      ],
+    },
+    {
+      text: "In Spain since September 2017. *Nine years and counting.*",
+      photos: [{ src: "/about/pc-spain.webp", alt: "Wearing a Spain jersey with a friend" }],
+    },
   ],
 
   thinking: [

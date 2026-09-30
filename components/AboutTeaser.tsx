@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp, revealViewport } from "@/lib/motion";
 import { renderEmphasis } from "@/lib/emphasis";
@@ -11,9 +12,10 @@ type AboutTeaserProps = {
   body: string;
   cta: string;
   href: string;
+  cover?: string;
 };
 
-export default function AboutTeaser({ title, body, cta, href }: AboutTeaserProps) {
+export default function AboutTeaser({ title, body, cta, href, cover }: AboutTeaserProps) {
   return (
     <section className="px-6 py-28 md:px-12">
       <motion.div initial="hidden" whileInView="visible" viewport={revealViewport} variants={fadeUp}>
@@ -32,8 +34,12 @@ export default function AboutTeaser({ title, body, cta, href }: AboutTeaserProps
               </span>
             </p>
           </div>
-          <div className="overflow-hidden rounded-2xl transition-transform duration-500 ease-out group-hover:-rotate-1 group-hover:scale-[1.02]">
-            <VisualPlaceholder label="photo of Mariana" className="aspect-auto! h-[26rem] md:h-[34rem]" />
+          <div className="relative h-[26rem] overflow-hidden rounded-2xl transition-transform duration-500 ease-out group-hover:-rotate-1 group-hover:scale-[1.02] md:h-[34rem]">
+            {cover ? (
+              <Image src={cover} alt="Mariana" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+            ) : (
+              <VisualPlaceholder label="photo of Mariana" className="aspect-auto! h-full" />
+            )}
           </div>
         </Link>
       </motion.div>

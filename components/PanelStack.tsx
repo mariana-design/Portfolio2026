@@ -15,14 +15,14 @@ function LeftRail() {
         activeDark ? "bg-paper-dark" : ""
       }`}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         {active && (
           <motion.div
             key={active.number}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1, ease: "linear" }}
           >
             <p className="font-serif text-7xl italic leading-none text-accent-warm md:text-8xl">
               {active.number.replace(/\s*—\s*$/, "")}

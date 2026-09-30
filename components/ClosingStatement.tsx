@@ -13,8 +13,12 @@ type ClosingStatementProps = {
   label: string;
   title: string;
   body: string;
-  links: { label: string; href: string }[];
+  links: { label: string; href: string; download?: boolean }[];
 };
+
+function isExternal(href: string) {
+  return href.startsWith("http") || href.startsWith("mailto:");
+}
 
 // The last word of the page: one oversized sentence, a short paragraph, one primary action and two quiet ones.
 export default function ClosingStatement({ id, anchor, number, label, title, body, links }: ClosingStatementProps) {
@@ -39,10 +43,13 @@ export default function ClosingStatement({ id, anchor, number, label, title, bod
           {renderEmphasis(title)}
         </h2>
         <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-[1fr_auto] md:items-end md:gap-20">
-          <p className="max-w-xl text-xl text-ink-dark/75 md:text-2xl md:leading-snug">{body}</p>
+          <p className="min-w-0 max-w-3xl text-xl text-ink-dark/75 md:text-2xl md:leading-snug">{body}</p>
           <div className="flex flex-wrap items-center gap-4">
             <a
               href={primary.href}
+              download={primary.download || undefined}
+              target={!primary.download && isExternal(primary.href) && primary.href.startsWith("http") ? "_blank" : undefined}
+              rel={primary.href.startsWith("http") ? "noopener noreferrer" : undefined}
               className="rounded-full bg-ink-dark px-8 py-4 text-base font-medium text-paper-dark transition-colors hover:bg-accent-warm"
             >
               {primary.label} ↗
@@ -51,6 +58,9 @@ export default function ClosingStatement({ id, anchor, number, label, title, bod
               <a
                 key={l.label}
                 href={l.href}
+                download={l.download || undefined}
+                target={!l.download && isExternal(l.href) && l.href.startsWith("http") ? "_blank" : undefined}
+                rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="rounded-full border border-ink-dark/30 px-6 py-3.5 text-sm font-medium transition-colors hover:border-accent-warm hover:text-accent-warm"
               >
                 {l.label} ↗

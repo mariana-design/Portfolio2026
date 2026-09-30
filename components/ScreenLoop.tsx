@@ -68,12 +68,11 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
             key={src}
             src={src}
             alt=""
-            width={480}
-            height={984}
+            fill
             sizes="200px"
             aria-hidden
             style={{ opacity: n === i ? 1 : 0, transition: `opacity ${fade}ms ease-in-out` }}
-            className="absolute inset-0 h-full w-full object-cover object-top"
+            className="object-cover object-top"
           />
         ))}
 
@@ -97,11 +96,10 @@ export default function ScreenLoop({ frames, alt, dwell = 1800, dwells, fade = 4
               <Image
                 src={frames[i]}
                 alt=""
-                width={480}
-                height={984}
+                fill
                 sizes="200px"
                 aria-hidden
-                className="h-full w-full object-cover object-top"
+                className="object-cover object-top"
               />
             </motion.div>
           </AnimatePresence>

@@ -3,7 +3,7 @@ type LockOverlayProps = { variant?: "phone" | "card" | "wide" };
 const blur = {
   phone: "backdrop-blur-[3px] group-hover:backdrop-blur-[2px]",
   card: "backdrop-blur-[1.5px] group-hover:backdrop-blur-[1px]",
-  wide: "backdrop-blur-[3px] group-hover:backdrop-blur-[2px]",
+  wide: "backdrop-blur-[2px] group-hover:backdrop-blur-[0.75px]",
 };
 
 const lock = {
@@ -19,7 +19,7 @@ export default function LockOverlay({ variant = "phone" }: LockOverlayProps) {
     <>
       <div
         aria-hidden
-        className={`absolute inset-0 bg-white/[0.06] transition-[backdrop-filter] duration-300 ease-out ${blur[variant]}`}
+        className={`absolute inset-0 bg-white/[0.06] transition-[backdrop-filter] duration-500 ease-out ${blur[variant]}`}
       />
       <svg
         aria-hidden

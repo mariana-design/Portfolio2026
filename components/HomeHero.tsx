@@ -50,7 +50,7 @@ export default function HomeHero({ eyebrow, name, introLead, words, footer }: Ho
           <HoverLetters text={name} />
         </motion.h1>
         <motion.p variants={fadeUp} className="mt-10 max-w-4xl text-2xl text-ink-soft md:text-4xl md:leading-[1.25]">
-          {introLead} <WordCycler words={words} />
+          {introLead} <WordCycler words={words} />.
         </motion.p>
       </motion.div>
 

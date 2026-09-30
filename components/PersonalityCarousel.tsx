@@ -5,8 +5,11 @@ import { useCallback, useEffect, useState } from "react";
 import { easeEditorial } from "@/lib/motion";
 import { renderEmphasis } from "@/lib/emphasis";
 
+type PersonalityPhoto = { src: string; alt: string };
+type PersonalityItem = { text: string; photos?: PersonalityPhoto[] };
+
 type PersonalityCarouselProps = {
-  items: string[];
+  items: PersonalityItem[];
   className?: string;
 };
 
@@ -35,12 +38,13 @@ export default function PersonalityCarousel({ items, className = "" }: Personali
   }, [go]);
 
   const pad = (n: number) => String(n).padStart(2, "0");
+  const current = items[index];
 
   return (
     <div className={className}>
-      <div className="relative min-h-[15rem] overflow-hidden md:min-h-[18rem]">
+      <div className="relative min-h-[30rem] overflow-hidden md:min-h-[34rem]">
         <AnimatePresence mode="wait" custom={dir} initial={false}>
-          <motion.p
+          <motion.div
             key={index}
             custom={dir}
             variants={slide}
@@ -55,10 +59,22 @@ export default function PersonalityCarousel({ items, className = "" }: Personali
               if (info.offset.x < -SWIPE) go(1);
               else if (info.offset.x > SWIPE) go(-1);
             }}
-            className="max-w-4xl cursor-grab touch-pan-y font-display text-3xl font-bold leading-[1.15] tracking-tight active:cursor-grabbing md:text-6xl"
+            className="cursor-grab touch-pan-y active:cursor-grabbing"
           >
-            {renderEmphasis(items[index])}
-          </motion.p>
+            {current.photos && current.photos.length > 0 && (
+              <div className="mb-8 flex gap-4">
+                {current.photos.map((p) => (
+                  <div key={p.src} className="h-44 w-36 shrink-0 overflow-hidden rounded-xl shadow-[0_10px_24px_-12px_rgba(0,0,0,0.35)] md:h-64 md:w-52">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.src} alt={p.alt} className="h-full w-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className="max-w-4xl font-display text-2xl font-bold leading-[1.15] tracking-tight md:text-5xl">
+              {renderEmphasis(current.text)}
+            </p>
+          </motion.div>
         </AnimatePresence>
       </div>
 

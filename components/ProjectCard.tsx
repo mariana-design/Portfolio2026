@@ -4,9 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeUp, revealViewport } from "@/lib/motion";
 import PhoneFrame from "./PhoneFrame";
+import CoverVideo from "./CoverVideo";
 import Stage from "./Stage";
 
-export type CardMockup = { src: string; alt: string; locked?: boolean };
+export type CardMockup = { src: string; alt: string; locked?: boolean; video?: string; poster?: string };
 
 type ProjectCardProps = {
   n: string;
@@ -30,16 +31,24 @@ const layouts: Record<number, { pos: string }[]> = {
 
 export default function ProjectCard({ n, title, meta, href, mockups, featured = false, className = "" }: ProjectCardProps) {
   const layout = layouts[mockups.length] ?? layouts[1];
+  const soleVideo = mockups.length === 1 ? mockups[0].video : undefined;
   return (
     <motion.div initial="hidden" whileInView="visible" viewport={revealViewport} variants={fadeUp} className={className}>
       <Link href={href} className="group block">
-        <Stage className="h-[22rem] items-start! justify-start! md:h-[28rem]">
-          {mockups.map((m, i) => (
-            <div key={m.src} className={`absolute transition-transform duration-500 ease-out ${layout[i].pos}`}>
-              <PhoneFrame src={m.src} alt={m.alt} locked={m.locked} width={220} />
-            </div>
-          ))}
-        </Stage>
+        {soleVideo ? (
+          // Raw cover video, no phone frame / tilt / stage gradient — shown exactly as delivered.
+          <div className="relative h-[22rem] w-full overflow-hidden rounded-2xl bg-black md:h-[28rem]">
+            <CoverVideo src={soleVideo} poster={mockups[0].poster} alt={mockups[0].alt} className="h-full w-full object-contain" />
+          </div>
+        ) : (
+          <Stage className="h-[22rem] items-start! justify-start! md:h-[28rem]">
+            {mockups.map((m, i) => (
+              <div key={m.src} className={`absolute transition-transform duration-500 ease-out ${layout[i].pos}`}>
+                <PhoneFrame src={m.src} alt={m.alt} locked={m.locked} width={220} />
+              </div>
+            ))}
+          </Stage>
+        )}
         <div className="mt-5 flex items-baseline gap-3">
           <span className="font-serif text-2xl italic text-accent-warm">{n}</span>
           <h3 className={`font-display font-bold tracking-tight ${featured ? "text-4xl md:text-5xl" : "text-xl md:text-2xl"}`}>

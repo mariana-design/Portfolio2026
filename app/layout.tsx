@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   title: "Mariana Benítez — Senior Product Designer & Strategist",
   description:
     "Portfolio of Mariana Benítez, Senior Product Designer & Strategist based in Barcelona.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -31,8 +31,15 @@ export default function PolaroidScatter({ photos, className = "" }: PolaroidScat
           className="relative -ml-6 w-44 shrink-0 bg-white p-3 pb-10 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] transition-[transform,box-shadow] duration-300 first:ml-0 hover:!z-50 hover:scale-105 hover:!rotate-0 md:-ml-10 md:w-60"
         >
           {p.src ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={p.src} alt={p.alt ?? ""} className="aspect-square w-full object-cover" />
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.src} alt={p.alt ?? ""} className="aspect-square w-full object-cover" />
+              {p.label && (
+                <figcaption className="absolute inset-x-3 bottom-3 text-center font-serif text-sm italic text-ink-soft">
+                  {p.label}
+                </figcaption>
+              )}
+            </>
           ) : (
             <div className="flex aspect-square w-full items-center justify-center border border-dashed border-ink/20 bg-ink/[0.03] p-3 text-center text-xs text-ink-soft">
               (visual: {p.label ?? `photo ${i + 1}`})

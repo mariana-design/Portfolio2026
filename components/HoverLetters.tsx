@@ -21,13 +21,16 @@ export default function HoverLetters({ text, className = "" }: HoverLettersProps
   return (
     <span className={className} aria-label={text} onMouseMove={onMove}>
       {words.map((word, w) => (
-        <span key={w} className="inline-block whitespace-nowrap" aria-hidden>
+        <span
+          key={w}
+          className={`inline-block whitespace-nowrap ${w < words.length - 1 ? "mr-[0.28em]" : ""}`}
+          aria-hidden
+        >
           {[...word].map((ch, i) => (
             <span key={i} data-hl className="hl">
               {ch}
             </span>
           ))}
-          {w < words.length - 1 && " "}
         </span>
       ))}
     </span>

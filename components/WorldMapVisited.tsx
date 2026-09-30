@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useRef, useState, type MouseEvent } from "react";
 import { worldBase, worldCountries, worldSize } from "@/content/worldMap";
 
 type WorldMapVisitedProps = {
@@ -9,24 +9,34 @@ type WorldMapVisitedProps = {
   className?: string;
 };
 
-const STEP_MS = 1400;
-const HOLD_MS = 2400;
+// Pixels the cursor must travel (in any direction) to reveal one more country —
+// makes it feel like tracing/drawing rather than sweeping to an x-position.
+const PX_PER_COUNTRY = 55;
 
 export default function WorldMapVisited({ countries, className = "" }: WorldMapVisitedProps) {
   const n = countries.length;
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.3 });
-  // step = how many countries are drawn (1..n). At n it rests before the loop restarts.
-  const [step, setStep] = useState(1);
+  // step = how many countries are drawn (0..n). Blank until the visitor moves the mouse over it.
+  const [step, setStep] = useState(0);
+  const traveled = useRef(0);
+  const lastPoint = useRef<{ x: number; y: number } | null>(null);
 
-  // Time-driven loop; it only ticks while the map is on screen and is never paused by the mouse.
-  useEffect(() => {
-    if (!inView) return;
-    const id = setTimeout(() => setStep((s) => (s >= n ? 1 : s + 1)), step >= n ? HOLD_MS : STEP_MS);
-    return () => clearTimeout(id);
-  }, [step, inView, n]);
+  const handleMove = (e: MouseEvent<SVGSVGElement>) => {
+    const point = { x: e.clientX, y: e.clientY };
+    if (lastPoint.current) {
+      const dx = point.x - lastPoint.current.x;
+      const dy = point.y - lastPoint.current.y;
+      traveled.current += Math.hypot(dx, dy);
+    }
+    lastPoint.current = point;
+    setStep(Math.min(n, Math.floor(traveled.current / PX_PER_COUNTRY)));
+  };
 
-  const current = countries[step - 1];
+  const handleLeave = () => {
+    lastPoint.current = null;
+  };
+
+  const current = step > 0 ? countries[step - 1] : undefined;
   const drawn = countries.slice(0, step);
   const pos = current ? worldCountries[current] : undefined;
 
@@ -34,11 +44,13 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
     <div ref={ref} className={className}>
       <svg
         viewBox={`0 0 ${worldSize.w} ${worldSize.h}`}
-        className="h-auto w-full"
+        className="h-auto w-full cursor-crosshair"
         role="img"
-        aria-label={`World map, ${n} visited countries drawn one by one`}
+        aria-label={`World map, ${n} visited countries — move the mouse to reveal them`}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
       >
-        <path d={worldBase} fill="var(--ink)" fillOpacity={0.06} stroke="var(--paper)" strokeWidth={0.5} />
+        <path d={worldBase} fill="#d4d4d8" stroke="#a1a1aa" strokeWidth={0.4} />
 
         {drawn.map((name) => {
           const c = worldCountries[name];
@@ -85,10 +97,8 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
       </svg>
 
       <div className="mt-6 flex items-baseline justify-between gap-6">
-        <p className="font-display text-2xl font-bold uppercase tracking-tight md:text-3xl" aria-live="polite">
-          {current}
-        </p>
-        <p className="font-serif text-lg italic tabular-nums text-ink-soft">
+        <p className="text-sm text-ink-soft">Move the mouse to discover where I've traveled</p>
+        <p className="font-serif text-lg italic tabular-nums text-ink-soft" aria-live="polite">
           {String(step).padStart(2, "0")}/{String(n).padStart(2, "0")}
         </p>
       </div>
