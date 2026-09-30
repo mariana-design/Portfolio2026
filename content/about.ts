@@ -9,6 +9,7 @@ export const about = {
       company: "Darma",
       role: "Product Strategist & Designer — AI-native product",
       dates: "Jul 2025 — Present",
+      website: { href: "https://www.darma.ai/", label: "darma.ai" },
       bullets: [
         "Led end-to-end UX design of an AI executive assistant at an early-stage startup, from onboarding and authentication flows to account management and email scheduling, with full product ownership and direct collaboration with the CEO, COO, and a team of 8 engineers.",
         "Owned product strategy and roadmap prioritization, ruthlessly prioritizing based on user impact and engineering capacity; ran sprint planning and retros to maintain delivery velocity in a distributed, early-stage team.",
@@ -50,19 +51,33 @@ export const about = {
       company: "IBM iX",
       role: "UX/UI and Service Designer",
       dates: "Oct 2021 — Oct 2022",
-      bullets: ["Clients: Acciona, Logista Pharma, CTTI"],
+      body: "At IBM iX we work at the intersection of strategy, creativity, and technology to help our clients digitally reinvent their businesses.",
+      bullets: [
+        "Designed solutions targeted for local and global markets.",
+        "Worked alongside a cross-functional team of high-performing Service, Product and UX/UI Designers, Strategists, Business Analysts, and Architects.",
+        "Created memorable experiences that delight the final users and drive profit to the client's business.",
+        "Clients: Utilities, Acciona, Logista Pharma, CTTI",
+      ],
     },
     {
       company: "Makeat",
       role: "Product & UX Designer",
       dates: "Apr 2021 — Oct 2021",
-      body: "Food tech / gastronomy",
-      bullets: ["Clients: Moët & Chandon, Belvedere Vodka, World Chocolate Factory"],
+      body: "Makeat Design Studio, focused on Food Design & Food Tech — revolutionizing the world of gastronomy through digital manufacturing to generate dazzling experiences for the user.",
+      bullets: [
+        "Designed products and experiences aimed at helping the world of gastronomy through innovation and technology, developing a digital manufacturing center dedicated to the future of gastronomy.",
+        "Clients: Moët & Chandon, Le Tribute, Bar Paradiso, Belvedere Vodka, SIPS Drinkery House, Popitas, World Chocolate Factory, World Bartender Competition",
+      ],
     },
     {
       company: "Koduz",
       role: "Project Manager & UX/UI Designer",
       dates: "Feb 2020 — Apr 2021",
+      bullets: [
+        "Joined as a product designer and grew into UX/UI, improving several pages of the website to make the experience easier at the point of sale.",
+        "Promoted to Project Manager partway through, running multiple projects at once — including Coliving Aribau, Apartament Sagrada Familia, and Buenavista.",
+        "Negotiated successfully with clients and suppliers through critical situations, including the most vulnerable stage of the pandemic and a major snowfall in Madrid.",
+      ],
     },
   ],
 

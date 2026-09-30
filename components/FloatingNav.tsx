@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSectionObserver } from "@/lib/section-observer";
@@ -11,11 +12,10 @@ const links = [
   { label: "About", href: "/about" },
 ];
 
-// Placeholder avatar — swap the initials div below for a real headshot <Image> once one is provided.
 function Avatar() {
   return (
-    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-warm/25 font-display text-xs font-bold text-ink">
-      MB
+    <span className="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full ring-1 ring-ink/10">
+      <Image src="/hero/cursor-portrait.webp" alt="Mariana Benítez" fill sizes="32px" className="object-cover grayscale" />
     </span>
   );
 }
