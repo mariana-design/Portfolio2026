@@ -9,7 +9,6 @@ export const about = {
       company: "Darma",
       role: "Product Strategist & Designer — AI-native product",
       dates: "Jul 2025 — Present",
-      website: { href: "https://www.darma.ai/", label: "darma.ai" },
       bullets: [
         "Led end-to-end UX design of an AI executive assistant at an early-stage startup, from onboarding and authentication flows to account management and email scheduling, with full product ownership and direct collaboration with the CEO, COO, and a team of 8 engineers.",
         "Owned product strategy and roadmap prioritization, ruthlessly prioritizing based on user impact and engineering capacity; ran sprint planning and retros to maintain delivery velocity in a distributed, early-stage team.",

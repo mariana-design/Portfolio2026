@@ -25,7 +25,7 @@ export default function HomeHero({ eyebrow, name, introLead, words, footer }: Ho
   }, [register]);
 
   return (
-    <section ref={ref} className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pb-16 pt-28 md:px-12">
+    <section ref={ref} className="relative overflow-hidden px-6 py-20 md:px-12 md:py-28">
       <motion.div
         initial="hidden"
         whileInView="visible"

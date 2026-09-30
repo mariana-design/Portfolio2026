@@ -45,9 +45,21 @@ export default function DarmaPage() {
         {/* Hero */}
         <div className="px-6 pb-12 pt-32 md:px-12">
           <TagList tags={darma.tags} className="mb-6" />
-          <h1 className="font-display text-5xl font-bold tracking-tight md:text-7xl">
-            {darma.title}
-          </h1>
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+            <h1 className="font-display text-5xl font-bold tracking-tight md:text-7xl">
+              {darma.title}
+            </h1>
+            {darma.website && (
+              <a
+                href={darma.website.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lg font-medium text-ink-soft underline decoration-ink-soft/30 underline-offset-4 transition-colors hover:text-accent-warm hover:decoration-accent-warm md:text-xl"
+              >
+                {darma.website.label} ↗
+              </a>
+            )}
+          </div>
           <p className="mt-4 max-w-xl text-xl font-medium text-ink-soft md:text-2xl">
             {darma.subtitle}
           </p>

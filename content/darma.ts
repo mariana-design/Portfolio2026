@@ -4,6 +4,7 @@ export const darma = {
   subtitle: "Designing when AI should act — and when humans should step in.",
   intro:
     "Darma is an AI assistant that negotiates scheduling on a user's behalf — inside real email threads — and knows when to stop and bring the human back in.",
+  website: { href: "https://www.darma.ai/", label: "darma.ai" },
   meta: [
     { label: "Role", value: "Product Designer → Product Lead" },
     { label: "Team", value: "6 engineers, 5 countries" },

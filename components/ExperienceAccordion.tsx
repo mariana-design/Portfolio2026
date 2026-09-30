@@ -10,7 +10,6 @@ type Entry = {
   dates: string;
   body?: string;
   bullets?: string[];
-  website?: { href: string; label: string };
 };
 
 type ExperienceAccordionProps = {
@@ -81,16 +80,6 @@ export default function ExperienceAccordion({ label, items, className = "" }: Ex
                             <li key={b}>— {b}</li>
                           ))}
                         </ul>
-                      )}
-                      {e.website && (
-                        <a
-                          href={e.website.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-4 inline-block font-medium text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-accent-warm hover:decoration-accent-warm"
-                        >
-                          {e.website.label} ↗
-                        </a>
                       )}
                     </div>
                   </motion.div>
