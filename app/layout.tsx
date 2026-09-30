@@ -23,9 +23,27 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.marianabenitezcorona.com"),
   title: "Mariana Benítez — Senior Product Designer & Strategist",
   description:
     "Portfolio of Mariana Benítez, Senior Product Designer & Strategist based in Barcelona.",
+  openGraph: {
+    title: "Mariana Benítez — Senior Product Designer & Strategist",
+    description:
+      "Portfolio of Mariana Benítez, Senior Product Designer & Strategist based in Barcelona.",
+    url: "https://www.marianabenitezcorona.com",
+    siteName: "Mariana Benítez",
+    images: ["/opengraph-image"],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mariana Benítez — Senior Product Designer & Strategist",
+    description:
+      "Portfolio of Mariana Benítez, Senior Product Designer & Strategist based in Barcelona.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export const viewport: Viewport = {
