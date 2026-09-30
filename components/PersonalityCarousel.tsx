@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
-import { easeEditorial } from "@/lib/motion";
+import { easeEditorial, fadeUp, revealViewport } from "@/lib/motion";
 import { renderEmphasis } from "@/lib/emphasis";
 
 type PersonalityPhoto = { src: string; alt: string };
@@ -20,7 +20,8 @@ const slide = {
   exit: (dir: number) => ({ x: dir * -70, opacity: 0 }),
 };
 
-export default function PersonalityCarousel({ items, className = "" }: PersonalityCarouselProps) {
+// Desktop: one card at a time, horizontal drag/arrows — plenty of room to linger on a single thought.
+function DesktopCarousel({ items }: { items: PersonalityItem[] }) {
   const [[index, dir], setState] = useState<[number, number]>([0, 1]);
 
   const go = useCallback(
@@ -41,7 +42,7 @@ export default function PersonalityCarousel({ items, className = "" }: Personali
   const current = items[index];
 
   return (
-    <div className={className}>
+    <div className="hidden md:block">
       <div className="relative min-h-[30rem] overflow-hidden md:min-h-[34rem]">
         <AnimatePresence mode="wait" custom={dir} initial={false}>
           <motion.div
@@ -99,6 +100,54 @@ export default function PersonalityCarousel({ items, className = "" }: Personali
           {pad(index + 1)}/{pad(items.length)}
         </p>
       </div>
+    </div>
+  );
+}
+
+// Mobile: a stacked card feed, part of normal page scroll — no nested scroll container to trap a swipe in,
+// just cards you scroll/swipe past the way you'd scroll any feed. Each card reveals on its own as it enters
+// view (not the stack as a whole) — with 12 cards the stack is far taller than the viewport, so a single
+// whileInView on the container would need an impossible fraction of it on-screen at once and never fire.
+function MobileFeed({ items }: { items: PersonalityItem[] }) {
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  return (
+    <div className="flex flex-col gap-5 md:hidden">
+      {items.map((item, i) => (
+        <motion.div
+          key={item.text}
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          variants={fadeUp}
+          className="rounded-2xl border border-ink/10 bg-ink/[0.02] p-5"
+        >
+          {item.photos && item.photos.length > 0 && (
+            <div className="mb-5 flex gap-2 xs:gap-3">
+              {item.photos.map((p) => (
+                <div
+                  key={p.src}
+                  className="aspect-[3/4] w-full min-w-0 shrink overflow-hidden rounded-xl shadow-[0_10px_24px_-12px_rgba(0,0,0,0.35)]"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.src} alt={p.alt} className="h-full w-full object-cover" />
+                </div>
+              ))}
+            </div>
+          )}
+          <p className="font-display text-xl font-bold leading-[1.2] tracking-tight">{renderEmphasis(item.text)}</p>
+          <p className="mt-4 font-serif text-sm italic tabular-nums text-ink-soft">{pad(i + 1)}/{pad(items.length)}</p>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+export default function PersonalityCarousel({ items, className = "" }: PersonalityCarouselProps) {
+  return (
+    <div className={className}>
+      <DesktopCarousel items={items} />
+      <MobileFeed items={items} />
     </div>
   );
 }

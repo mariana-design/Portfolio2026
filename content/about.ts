@@ -10,24 +10,45 @@ export const about = {
       role: "Product Strategist & Designer — AI-native product",
       dates: "Jul 2025 — Present",
       body: "Barcelona · 1 yr 3 mo",
+      bullets: [
+        "Led end-to-end UX design of an AI executive assistant at an early-stage startup, from onboarding and authentication flows to account management and email scheduling, with full product ownership and direct collaboration with the CEO, COO, and a team of 8 engineers.",
+        "Owned product strategy and roadmap prioritization, ruthlessly prioritizing based on user impact and engineering capacity; ran sprint planning and retros to maintain delivery velocity in a distributed, early-stage team.",
+        "Designed experiences built on top of generative AI, translating complex product logic into simple, intuitive flows: system states, edge cases, alternative paths, and acceptance criteria documented for engineering hand-off through Figma and Linear.",
+        "Designed the full product ecosystem across web, mobile, and iOS, owning the UX/UI across every surface and environment the product lived in.",
+      ],
     },
     {
       company: "Fail Fast Studio · CaixaBank",
       role: "UX/UI Product Designer",
       dates: "May 2024 — Jul 2025",
       body: "Barcelona · 1 yr 3 mo",
+      bullets: [
+        "Led the design and implementation of new features in CaixaBank's app, collaborating with cross-functional teams to improve user experience.",
+        "Created user-centric interfaces to enhance accessibility and boost engagement across platforms.",
+        "Collaborated with Product Owners and Developers to ensure design consistency and seamless integration of features.",
+      ],
     },
     {
       company: "Strands",
       role: "UX/UI Product Designer",
       dates: "Apr 2023 — May 2024",
       body: "Barcelona · 1 yr 2 mo",
+      bullets: [
+        "Developed and implemented design solutions for multiple product lines, improving UX/UI across platforms.",
+        "Drove the adoption of design thinking within the organization to enhance project delivery and collaboration.",
+        "Worked closely with stakeholders to create wireframes, prototypes, and user flows to optimize user experience.",
+      ],
     },
     {
       company: "SEAT & CUPRA",
       role: "Digital Service Designer",
       dates: "Oct 2022 — Apr 2023",
       body: "Barcelona · 7 mo",
+      bullets: [
+        "Led the full end-to-end service design process, from user research to implementation, for multiple products.",
+        "Conducted user research to improve user flows and collaborated with engineers to ensure smooth design implementation.",
+        "Developed high-fidelity prototypes and worked on iterative design improvements for ongoing products.",
+      ],
     },
     {
       company: "IBM iX",

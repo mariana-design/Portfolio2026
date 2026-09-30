@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useState, type MouseEvent } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 import { worldBase, worldCountries, worldSize } from "@/content/worldMap";
 
 type WorldMapVisitedProps = {
@@ -9,19 +9,24 @@ type WorldMapVisitedProps = {
   className?: string;
 };
 
-// Pixels the cursor must travel (in any direction) to reveal one more country —
+// Pixels the cursor/finger must travel (in any direction) to reveal one more country —
 // makes it feel like tracing/drawing rather than sweeping to an x-position.
 const PX_PER_COUNTRY = 55;
 
 export default function WorldMapVisited({ countries, className = "" }: WorldMapVisitedProps) {
   const n = countries.length;
   const ref = useRef<HTMLDivElement>(null);
-  // step = how many countries are drawn (0..n). Blank until the visitor moves the mouse over it.
+  // step = how many countries are drawn (0..n). Blank until the visitor moves the mouse/finger over it.
   const [step, setStep] = useState(0);
   const traveled = useRef(0);
   const lastPoint = useRef<{ x: number; y: number } | null>(null);
+  const dragging = useRef(false);
 
-  const handleMove = (e: MouseEvent<SVGSVGElement>) => {
+  // Mouse reveals on hover, same as before. Touch has no hover, so it only reveals while actively
+  // dragging a finger across the map (pointerdown → pointermove → pointerup), which is the touch
+  // equivalent of "moving the mouse over it".
+  const handleMove = (e: PointerEvent<SVGSVGElement>) => {
+    if (e.pointerType === "touch" && !dragging.current) return;
     const point = { x: e.clientX, y: e.clientY };
     if (lastPoint.current) {
       const dx = point.x - lastPoint.current.x;
@@ -32,7 +37,20 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
     setStep(Math.min(n, Math.floor(traveled.current / PX_PER_COUNTRY)));
   };
 
-  const handleLeave = () => {
+  const handleDown = (e: PointerEvent<SVGSVGElement>) => {
+    if (e.pointerType !== "touch") return;
+    dragging.current = true;
+    lastPoint.current = { x: e.clientX, y: e.clientY };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const handleUp = () => {
+    dragging.current = false;
+    lastPoint.current = null;
+  };
+
+  const handleLeave = (e: PointerEvent<SVGSVGElement>) => {
+    if (e.pointerType === "touch") return;
     lastPoint.current = null;
   };
 
@@ -44,11 +62,14 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
     <div ref={ref} className={className}>
       <svg
         viewBox={`0 0 ${worldSize.w} ${worldSize.h}`}
-        className="h-auto w-full cursor-crosshair"
+        className="h-auto w-full max-w-full cursor-crosshair touch-none select-none"
         role="img"
-        aria-label={`World map, ${n} visited countries — move the mouse to reveal them`}
-        onMouseMove={handleMove}
-        onMouseLeave={handleLeave}
+        aria-label={`World map, ${n} visited countries — move the mouse, or drag a finger on touch, to reveal them`}
+        onPointerMove={handleMove}
+        onPointerDown={handleDown}
+        onPointerUp={handleUp}
+        onPointerCancel={handleUp}
+        onPointerLeave={handleLeave}
       >
         <path d={worldBase} fill="#d4d4d8" stroke="#a1a1aa" strokeWidth={0.4} />
 
@@ -97,7 +118,7 @@ export default function WorldMapVisited({ countries, className = "" }: WorldMapV
       </svg>
 
       <div className="mt-6 flex items-baseline justify-between gap-6">
-        <p className="text-sm text-ink-soft">Move the mouse to discover where I've traveled</p>
+        <p className="text-sm text-ink-soft">Move the mouse, or drag a finger, to discover where I've traveled</p>
         <p className="font-serif text-lg italic tabular-nums text-ink-soft" aria-live="polite">
           {String(step).padStart(2, "0")}/{String(n).padStart(2, "0")}
         </p>
